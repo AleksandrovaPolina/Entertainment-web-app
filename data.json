@@ -1,0 +1,515 @@
+[
+    {
+      "title": "Beyond Earth",
+      "thumbnail": {
+        "trending": {
+          "small": "./assets/thumbnails/beyond-earth/trending/small.jpg",
+          "large": "./assets/thumbnails/beyond-earth/trending/large.jpg"
+        },
+        "regular": {
+          "small": "./assets/thumbnails/beyond-earth/regular/small.jpg",
+          "medium": "./assets/thumbnails/beyond-earth/regular/medium.jpg",
+          "large": "./assets/thumbnails/beyond-earth/regular/large.jpg"
+        }
+      },
+      "year": 2019,
+      "category": "Movie",
+      "rating": "PG",
+      "description": "Beyond Earth is a gripping sci-fi thriller that explores the profound implications of humanity's first steps towards interstellar colonization. Directed by Ava Chen, the film delves into the psychological and existential challenges faced by a group of pioneers as they venture beyond the confines of their home planet. With stunning visuals and thought-provoking themes, Beyond Earth offers a thrilling glimpse into the future of human exploration.",
+      "director": "Ava Chen",
+      "isBookmarked": false,
+      "isTrending": true
+    },
+    {
+      "title": "Bottom Gear",
+      "thumbnail": {
+        "trending": {
+          "small": "./assets/thumbnails/bottom-gear/trending/small.jpg",
+          "large": "./assets/thumbnails/bottom-gear/trending/large.jpg"
+        },
+        "regular": {
+          "small": "./assets/thumbnails/bottom-gear/regular/small.jpg",
+          "medium": "./assets/thumbnails/bottom-gear/regular/medium.jpg",
+          "large": "./assets/thumbnails/bottom-gear/regular/large.jpg"
+        }
+      },
+      "year": 2021,
+      "category": "Movie",
+      "rating": "PG",
+      "description": "Bottom Gear is a high-octane action-comedy that follows a group of misfit mechanics who transform ordinary cars into outrageous racing machines to compete in an underground street racing circuit. As they navigate through rivalries, heists, and hilarious mishaps, they must outwit both the law and rival racing crews to prove they're the ultimate gearheads.",
+      "director": "Sofia Ramirez",
+      "isBookmarked": false,
+      "isTrending": true
+    },
+    {
+      "title": "Undiscovered Cities",
+      "thumbnail": {
+        "trending": {
+          "small": "./assets/thumbnails/undiscovered-cities/trending/small.jpg",
+          "large": "./assets/thumbnails/undiscovered-cities/trending/large.jpg"
+        },
+        "regular": {
+          "small": "./assets/thumbnails/undiscovered-cities/regular/small.jpg",
+          "medium": "./assets/thumbnails/undiscovered-cities/regular/medium.jpg",
+          "large": "./assets/thumbnails/undiscovered-cities/regular/large.jpg"
+        }
+      },
+      "year": 2019,
+      "category": "TV Series",
+      "rating": "E",
+      "description": "Undiscovered Cities is a captivating documentary that unveils the hidden gems and untold stories of urban landscapes around the globe. Through stunning cinematography and insightful narratives, director Sofia Chen takes audiences on a mesmerizing journey to uncover the essence of cities often overlooked by mainstream tourism. From bustling metropolises to remote towns, this film celebrates the richness of culture, history, and humanity thriving in the world's undiscovered corners.",
+      "director": "Sofia Chen",
+      "isBookmarked": false,
+      "isTrending": true
+    },
+    {
+      "title": "1998",
+      "thumbnail": {
+        "trending": {
+          "small": "./assets/thumbnails/1998/trending/small.jpg",
+          "large": "./assets/thumbnails/1998/trending/large.jpg"
+        },
+        "regular": {
+          "small": "./assets/thumbnails/1998/regular/small.jpg",
+          "medium": "./assets/thumbnails/1998/regular/medium.jpg",
+          "large": "./assets/thumbnails/1998/regular/large.jpg"
+        }
+      },
+      "year": 2021,
+      "category": "Movie",
+      "rating": "18+",
+      "description": "1998 is a gripping drama that unfolds against the backdrop of political turmoil and societal change in South Korea. Directed by Lee Chang-dong, the film navigates the lives of ordinary people caught in the tumult of historical events, weaving together tales of love, loss, and resilience. As the country grapples with economic crisis and political unrest, the characters find themselves confronting personal demons and confronting the harsh realities of a rapidly evolving nation. Through powerful performances and masterful storytelling, 1998 offers a poignant reflection on the human spirit amidst adversity.",
+      "director": "Lee Chang-dong",
+      "isBookmarked": false,
+      "isTrending": true
+    },
+    {
+      "title": "Dark Side of the Moon",
+      "thumbnail": {
+        "trending": {
+          "small": "./assets/thumbnails/dark-side-of-the-moon/trending/small.jpg",
+          "large": "./assets/thumbnails/dark-side-of-the-moon/trending/large.jpg"
+        },
+        "regular": {
+          "small": "./assets/thumbnails/dark-side-of-the-moon/regular/small.jpg",
+          "medium": "./assets/thumbnails/dark-side-of-the-moon/regular/medium.jpg",
+          "large": "./assets/thumbnails/dark-side-of-the-moon/regular/large.jpg"
+        }
+      },
+      "year": 2018,
+      "category": "TV Series",
+      "rating": "PG",
+      "description": "Dark Side of the Moon is a gripping psychological thriller that delves into the depths of paranoia and isolation. Set in a remote lunar colony, the film follows a team of astronauts who begin to experience eerie phenomena that challenge their sanity. As tensions rise and trust wanes, they must confront the sinister forces lurking in the shadows of the desolate moon. Directed by Ava Monroe, this atmospheric film explores the darkest corners of the human psyche against the backdrop of the vast, unforgiving lunar landscape.",
+      "director": "Ava Monroe",
+      "isBookmarked": true,
+      "isTrending": true
+    },
+    {
+      "title": "The Great Lands",
+      "thumbnail": {
+        "regular": {
+          "small": "./assets/thumbnails/the-great-lands/regular/small.jpg",
+          "medium": "./assets/thumbnails/the-great-lands/regular/medium.jpg",
+          "large": "./assets/thumbnails/the-great-lands/regular/large.jpg"
+        }
+      },
+      "year": 2019,
+      "category": "Movie",
+      "rating": "E",
+      "description": "The Great Lands is a gripping adventure film set in a post-apocalyptic world where humanity struggles to survive amidst the ruins of civilization. Directed by Sofia Rodriguez, the movie follows a group of survivors as they navigate treacherous landscapes, encounter rival factions, and confront the dark secrets of the past. With stunning visuals and intense action, The Great Lands is a thrilling journey of resilience, courage, and hope in the face of adversity.",
+      "director": "Sofia Rodriguez",
+      "isBookmarked": false,
+      "isTrending": false
+    },
+    {
+      "title": "The Diary",
+      "thumbnail": {
+        "regular": {
+          "small": "./assets/thumbnails/the-diary/regular/small.jpg",
+          "medium": "./assets/thumbnails/the-diary/regular/medium.jpg",
+          "large": "./assets/thumbnails/the-diary/regular/large.jpg"
+        }
+      },
+      "year": 2019,
+      "category": "TV Series",
+      "rating": "PG",
+      "description": "The Diary is a gripping psychological thriller directed by Ava Thompson. The film follows the mysterious journey of a young woman who discovers an old diary hidden within the walls of her new home. As she delves deeper into its pages, she becomes increasingly entangled in a web of dark secrets and sinister events from the past. With each turn of the page, she unravels the chilling truth about the diary's previous owner, leading her down a path of danger and deception. As she races against time to uncover the diary's secrets, she realizes that some stories are best left buried.",
+      "director": "Ava Thompson",
+      "isBookmarked": false,
+      "isTrending": false
+    },
+    {
+      "title": "Earth’s Untouched",
+      "thumbnail": {
+        "regular": {
+          "small": "./assets/thumbnails/earths-untouched/regular/small.jpg",
+          "medium": "./assets/thumbnails/earths-untouched/regular/medium.jpg",
+          "large": "./assets/thumbnails/earths-untouched/regular/large.jpg"
+        }
+      },
+      "year": 2017,
+      "category": "Movie",
+      "rating": "18+",
+      "description": "Earth’s Untouched, directed by Maya Rivers, takes audiences on a breathtaking journey across the globe to explore some of the most remote and pristine landscapes on our planet. Through stunning cinematography and immersive storytelling, the film celebrates the beauty of untouched nature while also highlighting the urgent need for conservation efforts to protect these precious ecosystems for future generations.",
+      "director": "Maya Rivers",
+      "isBookmarked": true,
+      "isTrending": false
+    },
+    {
+      "title": "No Land Beyond",
+      "thumbnail": {
+        "regular": {
+          "small": "./assets/thumbnails/no-land-beyond/regular/small.jpg",
+          "medium": "./assets/thumbnails/no-land-beyond/regular/medium.jpg",
+          "large": "./assets/thumbnails/no-land-beyond/regular/large.jpg"
+        }
+      },
+      "year": 2019,
+      "category": "Movie",
+      "rating": "E",
+      "description": "No Land Beyond is a gripping dystopian thriller directed by Sofia Ramirez. Set in a post-apocalyptic world where society has collapsed, the film follows a group of survivors as they navigate the dangerous landscapes of a world without law or order. As they struggle to find safety and meaning in their new reality, they must confront their own humanity and the harsh truths of their existence. With stunning cinematography and intense performances, No Land Beyond explores themes of survival, resilience, and the bonds that hold us together in the face of adversity.",
+      "director": "Sofia Ramirez",
+      "isBookmarked": false,
+      "isTrending": false
+    },
+    {
+      "title": "During the Hunt",
+      "thumbnail": {
+        "regular": {
+          "small": "./assets/thumbnails/during-the-hunt/regular/small.jpg",
+          "medium": "./assets/thumbnails/during-the-hunt/regular/medium.jpg",
+          "large": "./assets/thumbnails/during-the-hunt/regular/large.jpg"
+        }
+      },
+      "year": 2016,
+      "category": "TV Series",
+      "rating": "PG",
+      "description": "In the remote wilderness, a group of seasoned hunters embark on their annual expedition, but when they become the hunted, they must rely on their wits and survival skills to make it out alive. As tension mounts and alliances shift, the hunters face a primal struggle for survival against an unseen adversary lurking in the shadows. Directed by Sarah Chambers, 'During the Hunt' is a gripping thriller that explores the thin line between predator and prey.",
+      "director": "Sarah Chambers",
+      "isBookmarked": false,
+      "isTrending": false
+    },
+    {
+      "title": "Autosport the Series",
+      "thumbnail": {
+        "regular": {
+          "small": "./assets/thumbnails/autosport-the-series/regular/small.jpg",
+          "medium": "./assets/thumbnails/autosport-the-series/regular/medium.jpg",
+          "large": "./assets/thumbnails/autosport-the-series/regular/large.jpg"
+        }
+      },
+      "year": 2016,
+      "category": "TV Series",
+      "rating": "18+",
+      "description": "Autosport the Series is a gripping cinematic journey into the adrenaline-fueled world of motorsports, chronicling the triumphs, trials, and rivalries of elite drivers as they push themselves to the limits on the race track. Directed by Marcus Rodriguez, this high-octane film immerses viewers in the heart-pounding action and showcases the passion and dedication of those who live for the thrill of the race.",
+      "director": "Marcus Rodriguez",
+      "isBookmarked": false,
+      "isTrending": false
+    },
+    {
+      "title": "Same Answer II",
+      "thumbnail": {
+        "regular": {
+          "small": "./assets/thumbnails/same-answer-2/regular/small.jpg",
+          "medium": "./assets/thumbnails/same-answer-2/regular/medium.jpg",
+          "large": "./assets/thumbnails/same-answer-2/regular/large.jpg"
+        }
+      },
+      "year": 2017,
+      "category": "Movie",
+      "rating": "E",
+      "description": "Same Answer II is a gripping psychological thriller that follows the journey of a seasoned detective as he delves into a series of perplexing murders with a chillingly familiar pattern. As he unravels the clues, he realizes that the answers to these crimes may lie within the depths of his own psyche, confronting him with uncomfortable truths and leading to a shocking revelation. Directed by acclaimed filmmaker Mia Johnson, Same Answer II is a captivating exploration of the complexities of the human mind and the blurred lines between truth and perception.",
+      "director": "Mia Johnson",
+      "isBookmarked": false,
+      "isTrending": false
+    },
+    {
+      "title": "Below Echo",
+      "thumbnail": {
+        "regular": {
+          "small": "./assets/thumbnails/below-echo/regular/small.jpg",
+          "medium": "./assets/thumbnails/below-echo/regular/medium.jpg",
+          "large": "./assets/thumbnails/below-echo/regular/large.jpg"
+        }
+      },
+      "year": 2016,
+      "category": "TV Series",
+      "rating": "PG",
+      "description": "Below Echo is a gripping psychological thriller that delves into the depths of the human psyche as a group of explorers ventures into an eerie underground cave system. As they descend further, they uncover unsettling secrets and face their own inner demons, leading to a chilling battle for survival against both the darkness within and the unknown forces lurking in the shadows. Directed by Sarah Miller, Below Echo promises to keep audiences on the edge of their seats with its intense atmosphere and unexpected twists.",
+      "director": "Sarah Miller",
+      "isBookmarked": false,
+      "isTrending": false
+    },
+    {
+      "title": "The Rockies",
+      "thumbnail": {
+        "regular": {
+          "small": "./assets/thumbnails/the-rockies/regular/small.jpg",
+          "medium": "./assets/thumbnails/the-rockies/regular/medium.jpg",
+          "large": "./assets/thumbnails/the-rockies/regular/large.jpg"
+        }
+      },
+      "year": 2015,
+      "category": "TV Series",
+      "rating": "E",
+      "description": "The Rockies is a gripping adventure drama directed by Sarah Lawson. Set against the majestic backdrop of the Rocky Mountains, the film follows the harrowing journey of a group of climbers as they attempt to conquer one of the most treacherous peaks in the range. Battling both nature's fury and their own inner demons, the climbers must rely on courage, teamwork, and sheer determination to survive. With breathtaking cinematography and intense performances, The Rockies is a thrilling exploration of human resilience in the face of adversity.",
+      "director": "Sarah Lawson",
+      "isBookmarked": true,
+      "isTrending": false
+    },
+    {
+      "title": "Relentless",
+      "thumbnail": {
+        "regular": {
+          "small": "./assets/thumbnails/relentless/regular/small.jpg",
+          "medium": "./assets/thumbnails/relentless/regular/medium.jpg",
+          "large": "./assets/thumbnails/relentless/regular/large.jpg"
+        }
+      },
+      "year": 2017,
+      "category": "Movie",
+      "rating": "PG",
+      "description": "Relentless is a gripping psychological thriller directed by Mia Johnson. The film follows a young woman who becomes entangled in a dangerous game of cat and mouse with a relentless stalker, pushing her to the brink of sanity as she fights to survive. As tension escalates and secrets unravel, she must confront her own demons while trying to outwit her pursuer before it's too late. With heart-pounding suspense and unexpected twists, Relentless keeps audiences on the edge of their seats until the very end.",
+      "director": "Mia Johnson",
+      "isBookmarked": true,
+      "isTrending": false
+    },
+    {
+      "title": "Community of Ours",
+      "thumbnail": {
+        "regular": {
+          "small": "./assets/thumbnails/community-of-ours/regular/small.jpg",
+          "medium": "./assets/thumbnails/community-of-ours/regular/medium.jpg",
+          "large": "./assets/thumbnails/community-of-ours/regular/large.jpg"
+        }
+      },
+      "year": 2018,
+      "category": "TV Series",
+      "rating": "18+",
+      "description": "Community of Ours, directed by Ava Thompson, is a heartwarming tale set in a small town where the residents, each with their unique quirks and struggles, come together to save their beloved community center from closure. As they work against the odds, they rediscover the true meaning of friendship, belonging, and the power of unity. With its charming characters and uplifting storyline, Community of Ours celebrates the strength found in coming together as a community.",
+      "director": "Ava Thompson",
+      "isBookmarked": false,
+      "isTrending": false
+    },
+    {
+      "title": "Van Life",
+      "thumbnail": {
+        "regular": {
+          "small": "./assets/thumbnails/van-life/regular/small.jpg",
+          "medium": "./assets/thumbnails/van-life/regular/medium.jpg",
+          "large": "./assets/thumbnails/van-life/regular/large.jpg"
+        }
+      },
+      "year": 2015,
+      "category": "Movie",
+      "rating": "PG",
+      "description": "Van Life is a heartwarming drama directed by Sofia Ramirez. The film follows the journey of three strangers who, each for their own reasons, embark on a nomadic lifestyle living out of their vans. As they traverse through stunning landscapes and unexpected challenges, they find solace, friendship, and a deeper connection with themselves and the world around them. Through their shared experiences, they discover that true freedom isn't found in the destination, but in the journey itself.",
+      "director": "Sofia Ramirez",
+      "isBookmarked": false,
+      "isTrending": false
+    },
+    {
+      "title": "The Heiress",
+      "thumbnail": {
+        "regular": {
+          "small": "./assets/thumbnails/the-heiress/regular/small.jpg",
+          "medium": "./assets/thumbnails/the-heiress/regular/medium.jpg",
+          "large": "./assets/thumbnails/the-heiress/regular/large.jpg"
+        }
+      },
+      "year": 2021,
+      "category": "Movie",
+      "rating": "PG",
+      "description": "The Heiress is a gripping drama directed by William Wyler. Set in the 19th century, it follows Catherine Sloper, a wealthy but socially awkward young woman who falls in love with a charming suitor. However, her domineering father suspects the man's motives, leading to a battle of wills that will shape Catherine's destiny. As secrets unravel and emotions collide, Catherine must navigate love, betrayal, and her own identity in this timeless tale of power and passion.",
+      "director": "William Wyler",
+      "isBookmarked": true,
+      "isTrending": false
+    },
+    {
+      "title": "Off the Track",
+      "thumbnail": {
+        "regular": {
+          "small": "./assets/thumbnails/off-the-track/regular/small.jpg",
+          "medium": "./assets/thumbnails/off-the-track/regular/medium.jpg",
+          "large": "./assets/thumbnails/off-the-track/regular/large.jpg"
+        }
+      },
+      "year": 2017,
+      "category": "Movie",
+      "rating": "18+",
+      "description": "Off the Track is a gripping drama directed by Sarah Jenkins. Set against the backdrop of a remote wilderness, the film follows the journey of a troubled young woman who embarks on a solo hiking trip to confront her inner demons. However, her solitary adventure takes a dark turn when she stumbles upon a mysterious stranger, triggering a series of events that forces her to confront her deepest fears. As she navigates through the unforgiving terrain, she discovers the true meaning of survival and redemption.",
+      "director": "Sarah Jenkins",
+      "isBookmarked": true,
+      "isTrending": false
+    },
+    {
+      "title": "Whispering Hill",
+      "thumbnail": {
+        "regular": {
+          "small": "./assets/thumbnails/whispering-hill/regular/small.jpg",
+          "medium": "./assets/thumbnails/whispering-hill/regular/medium.jpg",
+          "large": "./assets/thumbnails/whispering-hill/regular/large.jpg"
+        }
+      },
+      "year": 2017,
+      "category": "Movie",
+      "rating": "E",
+      "description": "Whispering Hill, directed by Ava Langley, is a gripping psychological thriller set in a remote countryside estate. When a young couple inherits the sprawling mansion, they soon discover dark secrets hidden within its walls. As they delve deeper into the mansion's history, they unearth a chilling tale of betrayal, obsession, and revenge, all while being haunted by mysterious whispers that seem to emanate from the surrounding hills. With tension mounting and trust eroding, the couple must confront the malevolent force lurking within the estate before it consumes them entirely.",
+      "director": "Ava Langley",
+      "isBookmarked": false,
+      "isTrending": false
+    },
+    {
+      "title": "112",
+      "thumbnail": {
+        "regular": {
+          "small": "./assets/thumbnails/112/regular/small.jpg",
+          "medium": "./assets/thumbnails/112/regular/medium.jpg",
+          "large": "./assets/thumbnails/112/regular/large.jpg"
+        }
+      },
+      "year": 2013,
+      "category": "TV Series",
+      "rating": "PG",
+      "description": "112 is a gripping thriller that unfolds in real-time as emergency call operator Emma receives a distress call from a kidnapped woman. Racing against time, Emma must navigate through a labyrinth of clues and deceit to save the victim before it's too late. Directed by Alejandro González Iñárritu, this heart-pounding film explores the intricacies of human desperation and resilience under pressure.",
+      "director": "Alejandro González Iñárritu",
+      "isBookmarked": false,
+      "isTrending": false
+    },
+    {
+      "title": "Lone Heart",
+      "thumbnail": {
+        "regular": {
+          "small": "./assets/thumbnails/lone-heart/regular/small.jpg",
+          "medium": "./assets/thumbnails/lone-heart/regular/medium.jpg",
+          "large": "./assets/thumbnails/lone-heart/regular/large.jpg"
+        }
+      },
+      "year": 2017,
+      "category": "Movie",
+      "rating": "E",
+      "description": "Lone Heart is a gripping drama directed by Ava Thompson. Set against the rugged backdrop of the American West, the film follows the journey of a solitary cowboy who embarks on a quest for redemption after a tragic event shatters his world. As he confronts his past and battles inner demons, he forms unexpected connections with those he encounters along the way. Lone Heart is a poignant exploration of loss, resilience, and the enduring power of human connection.",
+      "director": "Ava Thompson",
+      "isBookmarked": true,
+      "isTrending": false
+    },
+    {
+      "title": "Production Line",
+      "thumbnail": {
+        "regular": {
+          "small": "./assets/thumbnails/production-line/regular/small.jpg",
+          "medium": "./assets/thumbnails/production-line/regular/medium.jpg",
+          "large": "./assets/thumbnails/production-line/regular/large.jpg"
+        }
+      },
+      "year": 2018,
+      "category": "TV Series",
+      "rating": "PG",
+      "description": "Production Line is a gripping drama that delves into the intense world of automotive manufacturing. Set against the backdrop of a struggling factory, the film follows the lives of workers as they navigate through personal hardships, corporate pressures, and the looming threat of automation. Director Sarah Jenkins brings a raw and authentic portrayal of blue-collar workers striving to keep their livelihoods intact in the face of rapid technological advancement.",
+      "director": "Sarah Jenkins",
+      "isBookmarked": false,
+      "isTrending": false
+    },
+    {
+      "title": "Dogs",
+      "thumbnail": {
+        "regular": {
+          "small": "./assets/thumbnails/dogs/regular/small.jpg",
+          "medium": "./assets/thumbnails/dogs/regular/medium.jpg",
+          "large": "./assets/thumbnails/dogs/regular/large.jpg"
+        }
+      },
+      "year": 2016,
+      "category": "TV Series",
+      "rating": "E",
+      "description": "Dogs is a heartwarming tale directed by Sofia Rodriguez that follows the interconnected lives of various individuals and their beloved canine companions. Set against the backdrop of a bustling city, the film explores themes of companionship, loyalty, and the profound impact dogs have on human lives. As the characters navigate their own personal struggles, their relationships with their furry friends serve as a source of solace and joy, illustrating the timeless bond between humans and dogs.",
+      "director": "Sofia Rodriguez",
+      "isBookmarked": true,
+      "isTrending": false
+    },
+    {
+      "title": "Asia in 24 Days",
+      "thumbnail": {
+        "regular": {
+          "small": "./assets/thumbnails/asia-in-24-days/regular/small.jpg",
+          "medium": "./assets/thumbnails/asia-in-24-days/regular/medium.jpg",
+          "large": "./assets/thumbnails/asia-in-24-days/regular/large.jpg"
+        }
+      },
+      "year": 2020,
+      "category": "TV Series",
+      "rating": "PG",
+      "description": "Asia in 24 Days is a captivating documentary that follows the journey of a group of travelers as they traverse the diverse landscapes and cultures of Asia within the span of just under a month. From the bustling streets of Tokyo to the serene landscapes of rural Vietnam, the film captures the essence of each destination while highlighting the connections that bind this vast continent together. Through encounters with locals, breathtaking scenery, and immersive experiences, Asia in 24 Days offers a unique perspective on the rich tapestry of Asia. Directed by Mei Ling, the film invites audiences on a transformative exploration of the region's beauty and complexity.",
+      "director": "Mei Ling",
+      "isBookmarked": false,
+      "isTrending": false
+    },
+    {
+      "title": "The Tasty Tour",
+      "thumbnail": {
+        "regular": {
+          "small": "./assets/thumbnails/the-tasty-tour/regular/small.jpg",
+          "medium": "./assets/thumbnails/the-tasty-tour/regular/medium.jpg",
+          "large": "./assets/thumbnails/the-tasty-tour/regular/large.jpg"
+        }
+      },
+      "year": 2016,
+      "category": "TV Series",
+      "rating": "PG",
+      "description": "The Tasty Tour is a heartwarming culinary adventure that follows a group of eclectic food enthusiasts on a cross-country journey to explore the diverse flavors of their nation. From bustling city food markets to hidden rural gems, they uncover the stories behind each dish, connecting with local chefs and communities along the way. Directed by Sofia Ramirez, this delightful film celebrates the joy of food and the rich tapestry of culture it embodies.",
+      "director": "Sofia Ramirez",
+      "isBookmarked": false,
+      "isTrending": false
+    },
+    {
+      "title": "Darker",
+      "thumbnail": {
+        "regular": {
+          "small": "./assets/thumbnails/darker/regular/small.jpg",
+          "medium": "./assets/thumbnails/darker/regular/medium.jpg",
+          "large": "./assets/thumbnails/darker/regular/large.jpg"
+        }
+      },
+      "year": 2017,
+      "category": "Movie",
+      "rating": "18+",
+      "description": "Darker is a psychological thriller directed by Claire Roberts. Set in the eerie backdrop of a secluded town, the film delves into the unsettling story of a woman who discovers dark secrets about her family's past, leading her on a journey of self-discovery and survival. As she unravels the mysteries lurking in the shadows, she confronts the terrifying truth about her own identity. With suspenseful twists and intense performances, Darker promises to keep audiences on the edge of their seats until the very end.",
+      "director": "Claire Roberts",
+      "isBookmarked": true,
+      "isTrending": false
+    },
+    {
+      "title": "Unresolved Cases",
+      "thumbnail": {
+        "regular": {
+          "small": "./assets/thumbnails/unresolved-cases/regular/small.jpg",
+          "medium": "./assets/thumbnails/unresolved-cases/regular/medium.jpg",
+          "large": "./assets/thumbnails/unresolved-cases/regular/large.jpg"
+        }
+      },
+      "year": 2018,
+      "category": "TV Series",
+      "rating": "18+",
+      "description": "Unresolved Cases is a gripping mystery thriller directed by Maya Lang. Set in a small town plagued by unsolved crimes, the film follows Detective Sarah Hayes as she delves into a series of chilling murders that seem connected by a sinister thread. As Hayes unravels the tangled web of secrets and lies, she finds herself confronting her own demons while racing against time to catch a cunning killer before they strike again. With suspenseful twists and turns, Unresolved Cases keeps audiences on the edge of their seats until the final reveal.",
+      "director": "Sarah Hayes",
+      "isBookmarked": false,
+      "isTrending": false
+    },
+    {
+      "title": "Mission: Saturn",
+      "thumbnail": {
+        "regular": {
+          "small": "./assets/thumbnails/mission-saturn/regular/small.jpg",
+          "medium": "./assets/thumbnails/mission-saturn/regular/medium.jpg",
+          "large": "./assets/thumbnails/mission-saturn/regular/large.jpg"
+        }
+      },
+      "year": 2017,
+      "category": "Movie",
+      "rating": "PG",
+      "description": "Mission: Saturn is a gripping sci-fi thriller directed by Ava Chen. Set in the not-so-distant future, the film follows a team of astronauts on a perilous journey to Saturn's enigmatic moon, Titan. As they confront unexpected dangers and personal demons, they must race against time to uncover a mysterious anomaly that could hold the key to humanity's survival. With stunning visuals and edge-of-your-seat suspense, Mission: Saturn explores the depths of space and the resilience of the human spirit.",
+      "director": "Ava Chen",
+      "isBookmarked": true,
+      "isTrending": false
+    }
+  ]
