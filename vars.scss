@@ -7,7 +7,7 @@ $red: #fc4747;
 // Шаблон для заголовка L
 @mixin heading-L {
   font-family: "Outfit", sans-serif;
-  font-weight: 700; // Жирный
+  font-weight: 200; // Легкий
   font-size: 32px;
   color: #ffffff;
 }
@@ -15,7 +15,7 @@ $red: #fc4747;
 // Шаблон для заголовка M
 @mixin heading-M {
   font-family: "Outfit", sans-serif;
-  font-weight: 500; // Средний
+  font-weight: 400; // Обычный
   font-size: 24px;
   color: #ffffff;
 }
@@ -40,6 +40,7 @@ $red: #fc4747;
   font-family: "Outfit", sans-serif;
   font-weight: 300; // Легкий
   font-size: 18px;
+  color: #ffffff95;
 }
 
 @mixin text-S {
