@@ -1,4 +1,5 @@
 @import 'vars';
+@import 'modal_windows';
 
 * {
     margin: 0;
@@ -9,11 +10,13 @@
 
 .wrapper-main{
     margin: 30px;
+
     .titleRecom{
         @include heading-L;
         margin-bottom: 30px;
         padding: 10px;
     }
+
     .container {
         width: 100%; 
         max-width: 1240px;
@@ -24,7 +27,14 @@
         gap: 20px;
         justify-content: center;
         align-content: center;
-    
+
+        @media screen and (max-width: 768px) {
+                grid-template-columns: repeat(3, 1fr);
+        }
+        @media screen and (max-width: 376px) {
+                grid-template-columns: repeat(2, 1fr);
+        }
+
         .movieCard {
             width: 100%;
             border-radius: 10px;
@@ -47,12 +57,20 @@
                 transform: translate(-50%, -50%);
                 background-color: rgba(255, 255, 255, 0.314);
                 @include heading-XS;
-                color: white;
                 padding: 10px 20px;
                 border: none;
                 border-radius: 3rem;
                 cursor: pointer;
                 text-align: end;
+
+                @media screen and (max-width: 376px){
+                    width: 6rem;
+                    height: 2rem;
+                    background-position: .3rem center;
+                    top: 35%;
+                    left: 50%;
+                    padding-bottom: 2rem
+                }
             }
             
     
@@ -71,7 +89,7 @@
                 margin-top: 5px;
                 display: flex;
                 @include text-S;
-
+            
                 .movieYear,
                 .movieCategory,
                 .movieRating {
@@ -82,13 +100,17 @@
                     &:last-child {
                         margin-right: 0;
                     }
+            
+                    @media screen and (max-width: 376px){
+                        margin-right: 12px;
+                    }
                 }
-    
+            
                 .movieCategory::before {
                     content: url('/assets/icon-category-tv.svg');
                     margin-right: 5px;
                 }
-    
+            
                 .movieYear::after,
                 .movieCategory::after {
                     content: '•';
@@ -97,143 +119,31 @@
                     top: 50%;
                     transform: translateY(-50%);
                 }
-    
+            
                 .movieYear::after {
-                    left: 28px;
+                    left: 26px;
+                }
+            
+                @media screen and (max-width: 376px){
+                    .movieCategory::before {
+                        display: none;
+                    }
                 }
             }
-    
+            
             .movieTitle {
                 margin-top: 10px;
                 @include heading-XS;
+                @media screen and (max-width: 376px){
+                    margin-top: 7px;
+                    @include text-S; 
+                    color: white;
+                }
                 &:hover {
                     cursor: pointer;
                     text-decoration: underline;
                 }
             }
-        }
-    }
-    
-    // Медиазапросы для адаптивности
-    
-    @media screen and (max-width: 768px) {
-        .container {
-            grid-template-columns: repeat(3, 1fr);
-        }
-    
-    }
-    
-    @media screen and (max-width: 480px) {
-        .container {
-            grid-template-columns: repeat(2, 1fr);
-        }
-    }
-
-    .modal-backdrop {
-        position: fixed;
-        top: 0;
-        left: 0;
-        width: 100%;
-        height: 100%;
-        background-color: rgba(0, 0, 0, 0.367); 
-        display: flex;
-        justify-content: center;
-        align-items: center; 
-
-
-        .modal-content {
-            position: relative;
-            background-color: #161D2F;
-            border-radius: 10px;
-            box-shadow: 0 0 10px rgba(216, 216, 216, 0.08);
-            width: 50%;
-            padding: 3rem;
-            overflow-y: auto;
-            display: flex;
-            flex-direction: column;
-
-            @media screen and (max-width: 768px) {
-                width: 80%;
-                height: 80%;
-            }
-
-            .modal-movie-img {
-                width: 100%;
-                max-width: 450px;
-                height: auto;
-                border-radius: 10px;
-                display: block;
-                margin: 0 auto;
-
-                @media screen and (max-width: 768px){
-                    max-width: 320px;
-                }
-                @media screen and (max-width: 480px){
-                    max-width: 280px;
-                }
-                
-            }
-            
-            .modal-title {
-                @include heading-L;
-                margin: 15px 0;
-                background-color: #161D2F;
-
-                @media screen and (max-width: 768px){
-                    @include heading-M;
-                    margin: 8px 0;
-                }
-                @media screen and (max-width: 480px){
-                    @include heading-XS;
-                    margin: 5px 0;
-                }
-            }
-            
-            .modal-director{
-                @include text-M;
-                background-color: #161D2F;
-                margin-bottom: 18px;
-
-                @media screen and (max-width: 768px){
-                    @include text-S;
-                    margin-bottom: 12px;
-                }
-                @media screen and (max-width: 480px){
-                    margin-bottom: 8px;
-                }
-            } 
-            .modal-description {
-                @include text-S;
-                background-color: #161D2F;
-        }
-            .closeButton {
-                position: absolute;
-                top: 12px;
-                right: 12px;
-                width: 30px;
-                height: 30px;
-                border: none;
-                border-radius: 100%;
-                background-color: #FC4747;
-                cursor: pointer;
-                @include heading-S;
-                @media screen and (max-width: 768px){
-                    width: 20px;
-                    height: 20px;
-                    @include text-S;
-                    color: white;
-                }
-                @media screen and (max-width: 480px){
-                    width: 18px;
-                    height: 18px;
-                    @include text-S;
-                    color: white;
-                }
-
-            &:hover {
-                background-color: #be2424;
-            }
-        }
         }
     }
 }
