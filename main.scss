@@ -7,7 +7,13 @@
     background-color: #10141E;
 }
 
-
+.wrapper-main{
+    margin: 30px;
+    .titleRecom{
+        @include heading-L;
+        margin-bottom: 30px;
+        padding: 10px;
+    }
     .container {
         width: 100%; 
         max-width: 1240px;
@@ -28,32 +34,44 @@
                 cursor: pointer;
                 transform: scale(1.05);
             }
+
+            .playButton {
+                position: absolute;
+                background-image: url('./assets/icon-play.svg');
+                background-position: .7rem center;
+                background-repeat: no-repeat;
+                width: 7rem;
+                height: 2.5rem;
+                top: 40%;
+                left: 50%;
+                transform: translate(-50%, -50%);
+                background-color: rgba(255, 255, 255, 0.314);
+                @include heading-XS;
+                color: white;
+                padding: 10px 20px;
+                border: none;
+                border-radius: 3rem;
+                cursor: pointer;
+                text-align: end;
+            }
+            
     
             .movieCover {
                 position: relative;
                 width: 100%;
                 height: auto;
-                border-radius: 10px;
+                border-radius: 10px;   
                 &:hover {
                     box-shadow: 0 0 20px rgba(143, 143, 143, 0.5);
                 }
-
-                &:after {
-                    content: url('./assets/icon-bookmark-empty.svg'); 
-                    position: absolute;
-                    top: 5px; 
-                    right: 5px;
-                    z-index: 1;
-                    transform: translateY(-50%);
-                }
             }
-    
+
             .movieInfo {
                 width: 100%;
                 margin-top: 5px;
                 display: flex;
                 @include text-S;
-    
+
                 .movieYear,
                 .movieCategory,
                 .movieRating {
@@ -111,4 +129,111 @@
         }
     }
 
+    .modal-backdrop {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background-color: rgba(0, 0, 0, 0.367); 
+        display: flex;
+        justify-content: center;
+        align-items: center; 
 
+
+        .modal-content {
+            position: relative;
+            background-color: #161D2F;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(216, 216, 216, 0.08);
+            width: 50%;
+            padding: 3rem;
+            overflow-y: auto;
+            display: flex;
+            flex-direction: column;
+
+            @media screen and (max-width: 768px) {
+                width: 80%;
+                height: 80%;
+            }
+
+            .modal-movie-img {
+                width: 100%;
+                max-width: 450px;
+                height: auto;
+                border-radius: 10px;
+                display: block;
+                margin: 0 auto;
+
+                @media screen and (max-width: 768px){
+                    max-width: 320px;
+                }
+                @media screen and (max-width: 480px){
+                    max-width: 280px;
+                }
+                
+            }
+            
+            .modal-title {
+                @include heading-L;
+                margin: 15px 0;
+                background-color: #161D2F;
+
+                @media screen and (max-width: 768px){
+                    @include heading-M;
+                    margin: 8px 0;
+                }
+                @media screen and (max-width: 480px){
+                    @include heading-XS;
+                    margin: 5px 0;
+                }
+            }
+            
+            .modal-director{
+                @include text-M;
+                background-color: #161D2F;
+                margin-bottom: 18px;
+
+                @media screen and (max-width: 768px){
+                    @include text-S;
+                    margin-bottom: 12px;
+                }
+                @media screen and (max-width: 480px){
+                    margin-bottom: 8px;
+                }
+            } 
+            .modal-description {
+                @include text-S;
+                background-color: #161D2F;
+        }
+            .closeButton {
+                position: absolute;
+                top: 12px;
+                right: 12px;
+                width: 30px;
+                height: 30px;
+                border: none;
+                border-radius: 100%;
+                background-color: #FC4747;
+                cursor: pointer;
+                @include heading-S;
+                @media screen and (max-width: 768px){
+                    width: 20px;
+                    height: 20px;
+                    @include text-S;
+                    color: white;
+                }
+                @media screen and (max-width: 480px){
+                    width: 18px;
+                    height: 18px;
+                    @include text-S;
+                    color: white;
+                }
+
+            &:hover {
+                background-color: #be2424;
+            }
+        }
+        }
+    }
+}
