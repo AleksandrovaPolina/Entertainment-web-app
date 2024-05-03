@@ -1,3 +1,11 @@
+<<<<<<< HEAD
+fetch("./data.json")
+  .then((res) => res.json())
+  .then((data) => {
+    createDOMStructure(data.filter((movie) => !movie.isTrending));
+    createTrendingSection(data.filter((movie) => movie.isTrending));
+    addHorizontalScroll();
+=======
 let movies; 
 const wrapperMain = document.querySelector('.wrapper-main');
 
@@ -6,12 +14,31 @@ fetch('./data.json')
   .then(data => {
     movies = data.filter(movie => !movie.isTrending);
     createDOMStructure(movies);
+>>>>>>> master
   })
-  .catch(error => {
-    console.error('Ошибка загрузки или обработки JSON:', error);
+  .catch((error) => {
+    console.error("Ошибка загрузки или обработки JSON:", error);
   });
 
 function createDOMStructure(data) {
+<<<<<<< HEAD
+  data.forEach((movie) => {
+    const container = document.querySelector(".container");
+
+    const movieElement = document.createElement("div");
+    movieElement.classList.add("movieCard");
+
+    const movieImg = document.createElement("img");
+    movieImg.classList.add("movieCover");
+    movieImg.src =
+      movie.thumbnail &&
+      movie.thumbnail.regular &&
+      movie.thumbnail.regular.medium; // Обратите внимание на изменение пути к изображению
+    movieImg.alt = movie.title;
+
+    const infoElement = document.createElement("div");
+    infoElement.classList.add("movieInfo");
+=======
   data.forEach(movie => {
     const container = document.querySelector('.container');
     const movieElement = document.createElement('div');
@@ -40,21 +67,22 @@ function createDOMStructure(data) {
 
     const infoElement = document.createElement('div');
     infoElement.classList.add('movieInfo');
+>>>>>>> master
 
-    const yearElement = document.createElement('p');
-    yearElement.classList.add('movieYear');
+    const yearElement = document.createElement("p");
+    yearElement.classList.add("movieYear");
     yearElement.textContent = movie.year;
 
-    const categoryElement = document.createElement('p');
-    categoryElement.classList.add('movieCategory');
+    const categoryElement = document.createElement("p");
+    categoryElement.classList.add("movieCategory");
     categoryElement.textContent = movie.category;
 
-    const ratingElement = document.createElement('p');
-    ratingElement.classList.add('movieRating');
+    const ratingElement = document.createElement("p");
+    ratingElement.classList.add("movieRating");
     ratingElement.textContent = movie.rating;
 
-    const titleElement = document.createElement('h3');
-    titleElement.classList.add('movieTitle');
+    const titleElement = document.createElement("h3");
+    titleElement.classList.add("movieTitle");
     titleElement.textContent = movie.title;
 
     wrapperMain.appendChild(container);
@@ -65,8 +93,44 @@ function createDOMStructure(data) {
     infoElement.appendChild(ratingElement);
     movieElement.appendChild(infoElement);
     movieElement.appendChild(titleElement);
+<<<<<<< HEAD
+  });
+}
+
+function createTrendingSection(trendingMovies) {
+  const trendingContainer = document.querySelector(".trending-container");
+
+  trendingMovies.forEach((movie) => {
+    const trendingMovie = document.createElement("div");
+    trendingMovie.classList.add("trending-movie");
+
+    const trendingImg = document.createElement("img");
+    trendingImg.classList.add("trending-cover");
+    trendingImg.src =
+      movie.thumbnail &&
+      movie.thumbnail.regular &&
+      movie.thumbnail.regular.medium;
+    trendingImg.alt = movie.title;
+
+    const trendingTitle = document.createElement("h3");
+    trendingTitle.classList.add("trending-title");
+    trendingTitle.textContent = movie.title;
+
+    trendingMovie.appendChild(trendingImg);
+    trendingMovie.appendChild(trendingTitle);
+
+    trendingContainer.appendChild(trendingMovie);
+  });
+}
+
+function addHorizontalScroll() {
+  const trendingContainer = document.getElementById("trendingContainer");
+  trendingContainer.style.overflowX = "scroll"; // Установка горизонтальной прокрутки
+  // Дополнительные настройки по вашему усмотрению
+=======
     movieElement.appendChild(playButton);    
   });
+>>>>>>> master
 }
 
 function openModal(movie) {
