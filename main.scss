@@ -1,4 +1,9 @@
+<<<<<<< HEAD
 @import "vars";
+=======
+@import 'vars';
+@import 'modal_windows';
+>>>>>>> master
 
 * {
   margin: 0;
@@ -7,6 +12,7 @@
   background-color: #10141e;
 }
 
+<<<<<<< HEAD
 .container {
   width: 100%;
   max-width: 1240px;
@@ -132,3 +138,144 @@ h2 {
   margin-right: 10px;
 }
 /* Trending */
+=======
+.wrapper-main{
+    margin: 30px;
+
+    .titleRecom{
+        @include heading-L;
+        margin-bottom: 30px;
+        padding: 10px;
+    }
+
+    .container {
+        width: 100%; 
+        max-width: 1240px;
+        margin: 0 auto;
+        display: grid;
+        grid-template-columns: repeat(4, 1fr);
+        grid-template-rows: repeat(6, auto);
+        gap: 20px;
+        justify-content: center;
+        align-content: center;
+
+        @media screen and (max-width: 768px) {
+                grid-template-columns: repeat(3, 1fr);
+        }
+        @media screen and (max-width: 376px) {
+                grid-template-columns: repeat(2, 1fr);
+        }
+
+        .movieCard {
+            width: 100%;
+            border-radius: 10px;
+            padding: 10px;
+
+            &:hover {
+                cursor: pointer;
+                transform: scale(1.05);
+            }
+
+            .playButton {
+                position: absolute;
+                background-image: url('./assets/icon-play.svg');
+                background-position: .7rem center;
+                background-repeat: no-repeat;
+                width: 7rem;
+                height: 2.5rem;
+                top: 40%;
+                left: 50%;
+                transform: translate(-50%, -50%);
+                background-color: rgba(255, 255, 255, 0.314);
+                @include heading-XS;
+                padding: 10px 20px;
+                border: none;
+                border-radius: 3rem;
+                cursor: pointer;
+                text-align: end;
+
+                @media screen and (max-width: 376px){
+                    width: 6rem;
+                    height: 2rem;
+                    background-position: .3rem center;
+                    top: 35%;
+                    left: 50%;
+                    padding-bottom: 2rem
+                }
+            }
+            
+    
+            .movieCover {
+                position: relative;
+                width: 100%;
+                height: auto;
+                border-radius: 10px;   
+                &:hover {
+                    box-shadow: 0 0 20px rgba(143, 143, 143, 0.5);
+                }
+            }
+
+            .movieInfo {
+                width: 100%;
+                margin-top: 5px;
+                display: flex;
+                @include text-S;
+            
+                .movieYear,
+                .movieCategory,
+                .movieRating {
+                    display: inline-block;
+                    position: relative;
+                    margin-right: 20px; 
+            
+                    &:last-child {
+                        margin-right: 0;
+                    }
+            
+                    @media screen and (max-width: 376px){
+                        margin-right: 12px;
+                    }
+                }
+            
+                .movieCategory::before {
+                    content: url('/assets/icon-category-tv.svg');
+                    margin-right: 5px;
+                }
+            
+                .movieYear::after,
+                .movieCategory::after {
+                    content: '•';
+                    position: absolute;
+                    margin-left: 5px;
+                    top: 50%;
+                    transform: translateY(-50%);
+                }
+            
+                .movieYear::after {
+                    left: 26px;
+                }
+            
+                @media screen and (max-width: 376px){
+                    .movieCategory::before {
+                        display: none;
+                    }
+                }
+            }
+            
+            .movieTitle {
+                margin-top: 10px;
+                @include heading-XS;
+                @media screen and (max-width: 376px){
+                    margin-top: 7px;
+                    @include text-S; 
+                    color: white;
+                }
+                &:hover {
+                    cursor: pointer;
+                    text-decoration: underline;
+                }
+            }
+        }
+    }
+}
+>>>>>>> master
