@@ -1,4 +1,4 @@
-export function createTrendingMoviesSection(data) {
+function createTrendingMoviesSection(data) {
   const trendingMoviesContainer = document.querySelector(
     ".trendingMoviesContainer"
   );
@@ -17,10 +17,10 @@ export function createTrendingMoviesSection(data) {
 
     const infoElement = document.createElement("div");
     infoElement.classList.add("movieInfoNew");
-    infoElement.innerHTML = `<p>${movie.title}</p>
-        <p>${movie.year}</p>
-        <p>${movie.category}</p>
-        <p>${movie.rating}</p>`;
+    infoElement.innerHTML = `  <p class = "year">${movie.year}</p>
+    <p class = "category">${movie.category}</p>
+    <p class = "rating">${movie.rating}</p>
+    <p class = "title">${movie.title}</p>`;
 
     const bookmarkIcon = document.createElement("img");
     bookmarkIcon.src = movie.isBookmarked
@@ -39,3 +39,30 @@ export function createTrendingMoviesSection(data) {
     trendingMoviesContainer.appendChild(movieCard);
   });
 }
+
+const container = document.querySelector(".trendingMoviesContainer");
+let isDown = false;
+let startX;
+let scrollLeft;
+
+container.addEventListener("mousedown", (e) => {
+  isDown = true;
+  startX = e.pageX - container.offsetLeft;
+  scrollLeft = container.scrollLeft;
+});
+
+container.addEventListener("mouseleave", () => {
+  isDown = false;
+});
+
+container.addEventListener("mouseup", () => {
+  isDown = false;
+});
+
+container.addEventListener("mousemove", (e) => {
+  if (!isDown) return;
+  e.preventDefault();
+  const x = e.pageX - container.offsetLeft;
+  const walk = (x - startX) * 3;
+  container.scrollLeft = scrollLeft - walk;
+});
