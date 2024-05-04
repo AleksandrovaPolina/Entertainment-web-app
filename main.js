@@ -145,7 +145,19 @@ function createTrendingMoviesSection(data) {
       <p>${movie.category}</p>
       <p>${movie.rating}</p>`;
 
+    const bookmarkIcon = document.createElement("img");
+    bookmarkIcon.src = movie.isBookmarked
+      ? "./assets/icon-bookmark-full.svg"
+      : "./assets/icon-bookmark-empty.svg";
+    bookmarkIcon.alt = movie.isBookmarked ? "Bookmark(full)" : "Bookmark";
+    bookmarkIcon.classList.add("bookmarkIcon");
+
+    const bookmarkContainer = document.createElement("div");
+    bookmarkContainer.classList.add("bookmarkContainer");
+    bookmarkContainer.appendChild(bookmarkIcon);
+
     movieCard.appendChild(movieImg);
+    movieCard.appendChild(bookmarkContainer);
     movieCard.appendChild(infoElement);
     trendingMoviesContainer.appendChild(movieCard);
   });
