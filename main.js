@@ -26,6 +26,17 @@ function createDOMStructure(data) {
       movie.thumbnail.regular.medium;
     movieImg.alt = movie.title;
 
+    const bookmarkIcon = document.createElement("img");
+    bookmarkIcon.src = movie.isBookmarked
+      ? "./assets/icon-bookmark-full.svg"
+      : "./assets/icon-bookmark-empty.svg";
+    bookmarkIcon.alt = movie.isBookmarked ? "Bookmark(full)" : "Bookmark";
+    bookmarkIcon.classList.add("bookmarkIcon");
+
+    const bookmarkContainer = document.createElement("div");
+    bookmarkContainer.classList.add("bookmarkContainer");
+    bookmarkContainer.appendChild(bookmarkIcon);
+
     const playButton = document.createElement("button");
     playButton.classList.add("playButton");
     playButton.textContent = "Play";
@@ -41,6 +52,7 @@ function createDOMStructure(data) {
     playButton.addEventListener("click", () => {
       openModal(movie);
     });
+    
 
     const infoElement = document.createElement("div");
     infoElement.classList.add("movieInfo");
@@ -64,6 +76,7 @@ function createDOMStructure(data) {
     wrapperMain.appendChild(container);
     container.appendChild(movieElement);
     movieElement.appendChild(movieImg);
+    movieElement.appendChild(bookmarkContainer);
     infoElement.appendChild(yearElement);
     infoElement.appendChild(categoryElement);
     infoElement.appendChild(ratingElement);
