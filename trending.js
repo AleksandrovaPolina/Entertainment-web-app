@@ -2,7 +2,12 @@ function createTrendingMoviesSection(data) {
   const trendingMoviesContainer = document.querySelector(
     ".trendingMoviesContainer"
   );
-
+  if (data.length === 0) {
+    const paragraph = document.createElement("p");
+    paragraph.innerText = "No movies or TV series found";
+    paragraph.classList.add("notFoundText");
+    trendingMoviesContainer.appendChild(paragraph);
+  }
   data.forEach((movie) => {
     const movieCard = document.createElement("div");
     movieCard.classList.add("movieCardNew");
