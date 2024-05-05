@@ -1,18 +1,39 @@
 let movies;
+const urlParams = new URLSearchParams(window.location.search);
+const searchWord = urlParams.get("inputSearch");
+document.getElementById("inputSearch").value = searchWord;
 const wrapperMain = document.querySelector(".wrapper-main");
 
 fetch("./data.json")
   .then((res) => res.json())
   .then((data) => {
     movies = data.filter((movie) => !movie.isTrending);
+    if (searchWord) {
+      movies = movies.filter((movie) => {
+        return movie.title.toLowerCase().includes(searchWord.toLowerCase());
+      });
+    }
     createDOMStructure(movies);
-    createTrendingMoviesSection(data.filter((movie) => movie.isTrending));
+    let trendingMovies = data.filter((movie) => movie.isTrending);
+    if (searchWord) {
+      trendingMovies = trendingMovies.filter((movie) => {
+        return movie.title.toLowerCase().includes(searchWord.toLowerCase());
+      });
+    }
+    createTrendingMoviesSection(trendingMovies);
   })
   .catch((error) => {
     console.error("Ошибка загрузки или обработки JSON:", error);
   });
 
 function createDOMStructure(data) {
+  if (data.length === 0) {
+    const container = document.querySelector(".container");
+    const paragraph = document.createElement("p");
+    paragraph.innerText = "No movies or TV series found";
+    paragraph.classList.add("notFoundText");
+    container.appendChild(paragraph);
+  }
   data.forEach((movie) => {
     const container = document.querySelector(".container");
     const movieElement = document.createElement("div");
