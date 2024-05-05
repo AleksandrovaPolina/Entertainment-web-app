@@ -11,6 +11,12 @@
 
 .wrapper-main {
   margin: 30px;
+  @media screen and (max-width: 376px) {
+    margin-top: 10px;
+  }
+  @media screen and (max-width: 768px) {
+    margin-top: 15px;
+  }
 
   .titleRecom {
     @include heading-L;
