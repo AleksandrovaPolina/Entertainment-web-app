@@ -14,7 +14,7 @@ fetch("./data.json")
       });
     }
     createDOMStructure(movies);
-    let trendingMovies = data.filter((movie) => movie.isTrending);
+    const trendingMovies = data.filter((movie) => movie.isTrending);
     if (searchWord) {
       trendingMovies = trendingMovies.filter((movie) => {
         return movie.title.toLowerCase().includes(searchWord.toLowerCase());
@@ -73,7 +73,6 @@ function createDOMStructure(data) {
     playButton.addEventListener("click", () => {
       openModal(movie);
     });
-    
 
     const infoElement = document.createElement("div");
     infoElement.classList.add("movieInfo");
