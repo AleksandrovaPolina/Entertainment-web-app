@@ -27,6 +27,23 @@ function createTrendingMoviesSection(data) {
     <p class = "rating">${movie.rating}</p>
     <p class = "title">${movie.title}</p>`;
 
+    // modal
+    const playButton = document.createElement("button");
+    playButton.classList.add("playButton");
+    playButton.textContent = "Play";
+
+    movieCard.addEventListener("mouseenter", () => {
+      playButton.style.display = "block";
+    });
+
+    movieCard.addEventListener("mouseleave", () => {
+      playButton.style.display = "none";
+    });
+
+    playButton.addEventListener("click", () => {
+      openModal(movie);
+    });
+    // modal
     const bookmarkIcon = document.createElement("img");
     bookmarkIcon.src = movie.isBookmarked
       ? "./assets/icon-bookmark-full.svg"
@@ -42,7 +59,51 @@ function createTrendingMoviesSection(data) {
     movieCard.appendChild(bookmarkContainer);
     movieCard.appendChild(infoElement);
     trendingMoviesContainer.appendChild(movieCard);
+    movieCard.appendChild(playButton);
   });
+}
+
+function openModal(movie) {
+  const modalBackdrop = document.createElement("div");
+  modalBackdrop.classList.add("modal-backdrop");
+  wrapperMain.appendChild(modalBackdrop);
+
+  const modalContent = document.createElement("div");
+  modalContent.classList.add("modal-content");
+  modalBackdrop.appendChild(modalContent);
+
+  const movieImg = document.createElement("img");
+  movieImg.classList.add("modal-movie-img");
+  movieImg.src =
+    movie.thumbnail && movie.thumbnail.regular && movie.thumbnail.regular.large;
+  movieImg.alt = movie.title;
+  modalContent.appendChild(movieImg);
+
+  const movieTitle = document.createElement("h2");
+  movieTitle.classList.add("modal-title");
+  movieTitle.textContent = movie.title;
+  modalContent.appendChild(movieTitle);
+
+  const movieDirector = document.createElement("p");
+  movieDirector.classList.add("modal-director");
+  movieDirector.textContent = "Director: " + movie.director;
+  modalContent.appendChild(movieDirector);
+
+  const movieDescription = document.createElement("p");
+  movieDescription.classList.add("modal-description");
+  movieDescription.textContent = movie.description;
+  modalContent.appendChild(movieDescription);
+
+  const closeButton = document.createElement("button");
+  closeButton.classList.add("closeButton");
+  closeButton.textContent = "×";
+  closeButton.addEventListener("click", closeModal);
+  modalContent.appendChild(closeButton);
+}
+
+function closeModal() {
+  const modalBackdrop = document.querySelector(".modal-backdrop");
+  wrapperMain.removeChild(modalBackdrop);
 }
 
 const container = document.querySelector(".trendingMoviesContainer");

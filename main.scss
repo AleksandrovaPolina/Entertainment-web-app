@@ -4,40 +4,42 @@
 @import "side-nav";
 
 * {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
 }
 
-body{
-    background-color: $dark-blue;
+body {
+  background-color: $dark-blue;
 }
 
 .wrapper-main {
-    margin: 30px;
+  margin: 30px;
 
-    @media screen and (max-width: 376px) {
+  @media screen and (max-width: 376px) {
     margin-top: 10px;
-    }
+  }
 
-    @media screen and (max-width: 768px) {
+  @media screen and (max-width: 768px) {
     margin-top: 15px;
-    }
-
-    .titleRecom {
+  }
+  .modal-backdrop {
+    z-index: 5;
+  }
+  .titleRecom {
     @include heading-L;
     margin-bottom: 30px;
     padding: 10px;
 
     @media screen and (max-width: 376px) {
-        font-size: 20px;
-        font-weight: 300;
-        line-height: 25px;
-        margin-bottom: 10px;
+      font-size: 20px;
+      font-weight: 300;
+      line-height: 25px;
+      margin-bottom: 10px;
     }
-    }
+  }
 
-    .container {
+  .container {
     width: 100%;
     max-width: 1240px;
     margin: 0 auto;
@@ -79,20 +81,19 @@ body{
         flex-wrap: nowrap;
         justify-content: center;
         align-items: center;
-        @media screen and (max-width: 376px){
-            top: 14px;
-            right: 16px;
-            width: 20px;
-            height: 20px;
-
+        @media screen and (max-width: 376px) {
+          top: 14px;
+          right: 16px;
+          width: 20px;
+          height: 20px;
         }
         .bookmarkIcon {
-            width: 12px;
-            height: 14px;
-            @media screen and (max-width: 376px){
-                width: 8px;
-                height: 10px;
-            }
+          width: 12px;
+          height: 14px;
+          @media screen and (max-width: 376px) {
+            width: 8px;
+            height: 10px;
+          }
         }
       }
       .playButton {
