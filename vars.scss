@@ -49,3 +49,17 @@ $red: #fc4747;
   font-size: 13px;
   color: #ffffff95;
 }
+
+@mixin text-login {
+  font-family: "Outfit", sans-serif;
+  font-weight: 300; // Легкий
+  font-size: 15px;
+  color: white;
+}
+
+@mixin text-sign-up {
+  font-family: "Outfit", sans-serif;
+  font-weight: 300; // Легкий
+  font-size: 15px;
+  color: $red;
+}
