@@ -42,6 +42,7 @@ function createTrendingMoviesSection(data) {
 
     playButton.addEventListener("click", () => {
       openModal(movie);
+      disableScroll();
     });
     // modal
     const bookmarkIcon = document.createElement("img");
@@ -97,7 +98,10 @@ function openModal(movie) {
   const closeButton = document.createElement("button");
   closeButton.classList.add("closeButton");
   closeButton.textContent = "×";
-  closeButton.addEventListener("click", closeModal);
+  closeButton.addEventListener("click", () => {
+    closeModal();
+    enableScroll();
+  });
   modalContent.appendChild(closeButton);
 }
 
@@ -105,6 +109,14 @@ function closeModal() {
   const modalBackdrop = document.querySelector(".modal-backdrop");
   wrapperMain.removeChild(modalBackdrop);
 }
+
+function disableScroll(){
+  document.body.classList.add("disable-scroll");
+}
+
+function enableScroll(){
+  document.body.classList.remove("disable-scroll");
+};
 
 const container = document.querySelector(".trendingMoviesContainer");
 let isDown = false;

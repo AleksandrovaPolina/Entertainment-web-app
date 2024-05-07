@@ -4,6 +4,8 @@ const searchWord = urlParams.get("inputSearch");
 document.getElementById("inputSearch").value = searchWord;
 const wrapperMain = document.querySelector(".wrapper-main");
 
+///////////Запуск json///////////////////////////////
+
 fetch("./data.json")
   .then((res) => res.json())
   .then((data) => {
@@ -13,6 +15,9 @@ fetch("./data.json")
         return movie.title.toLowerCase().includes(searchWord.toLowerCase());
       });
     }
+
+/////////Создание DOM элементов для секции trending////////////////////////////////
+
     createDOMStructure(movies);
     const trendingMovies = data.filter((movie) => movie.isTrending);
     if (searchWord) {
@@ -25,6 +30,9 @@ fetch("./data.json")
   .catch((error) => {
     console.error("Ошибка загрузки или обработки JSON:", error);
   });
+
+
+/////////Создание DOM элементов для секции recommended////////////////////////////////
 
 function createDOMStructure(data) {
   if (data.length === 0) {
@@ -62,6 +70,8 @@ function createDOMStructure(data) {
     playButton.classList.add("playButton");
     playButton.textContent = "Play";
 
+    /////////Обработчики собитий кнопки play////////////////////////////////
+
     movieElement.addEventListener("mouseenter", () => {
       playButton.style.display = "block";
     });
@@ -72,6 +82,7 @@ function createDOMStructure(data) {
 
     playButton.addEventListener("click", () => {
       openModal(movie);
+      disableScroll();
     });
 
     const infoElement = document.createElement("div");
@@ -106,6 +117,12 @@ function createDOMStructure(data) {
   });
 }
 
+    ///////////////////////////////Модальные окна//////////////////////
+
+
+
+    /////////Открытие и структура модального окна////////////////////////////////
+
 function openModal(movie) {
   const modalBackdrop = document.createElement("div");
   modalBackdrop.classList.add("modal-backdrop");
@@ -137,17 +154,33 @@ function openModal(movie) {
   movieDescription.textContent = movie.description;
   modalContent.appendChild(movieDescription);
 
+///////////////////////Кнопка закрытия/////////////////////////////
+
   const closeButton = document.createElement("button");
   closeButton.classList.add("closeButton");
   closeButton.textContent = "×";
-  closeButton.addEventListener("click", closeModal);
+  closeButton.addEventListener("click", () => {
+    closeModal();
+    enableScroll();
+  });
   modalContent.appendChild(closeButton);
+};
 
-  wrapperMain.classList.add("modal-open");
-}
+    /////////Закрытие модального окна////////////////////////////////
 
 function closeModal() {
   const modalBackdrop = document.querySelector(".modal-backdrop");
   wrapperMain.removeChild(modalBackdrop);
-  wrapperMain.classList.remove("modal-open");
-}
+  //enableScroll();
+};
+
+    /////////Поведение прокрутки при открытом/закрытом модальном окне/////////////////.////
+
+function disableScroll(){
+  document.body.classList.add("disable-scroll");
+};
+
+function enableScroll(){
+  console.log("Scroll enabled");
+  document.body.classList.remove("disable-scroll");
+};
