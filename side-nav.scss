@@ -12,6 +12,10 @@ button {
   cursor: pointer;
 }
 
+nav {
+  margin-right: 100px;
+}
+
 .nav {
   &__bg {
     background-color: $semi-dark-blue;
@@ -19,7 +23,7 @@ button {
 
   &__wrap {
     width: 96px;
-    height: 960px;
+    height: 97vh;
     margin: 10px;
     border-radius: 20px;
 
@@ -27,6 +31,10 @@ button {
     flex-direction: column;
     justify-content: space-between;
     align-items: center;
+
+    position: fixed;
+    top: 0;
+    z-index: 100;
   }
 
   &__main {
@@ -61,6 +69,9 @@ button {
 
 // Медиазапросы для адаптивности
 @media screen and (max-width: 768px) {
+  nav {
+    margin-bottom: 100px;
+  }
   .wrap {
     flex-direction: column;
   }
@@ -118,7 +129,7 @@ button {
 @media screen and (max-width: 480px) {
   .nav {
     &__wrap {
-      text-decoration: none;
+      width: 90%;
     }
   }
 }
