@@ -39,14 +39,44 @@ nav {
 
   &__main {
     margin-top: 40px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+
+  &__theme {
+    display: flex;
+    margin-top: 20px;
+    div {
+      display: flex;
+      flex-direction: column;
+      input {
+        appearance: none;
+        -webkit-appearance: none;
+        -moz-appearance: none;
+      }
+      .label {
+        height: 15px;
+        width: 15px;
+        margin: 5px;
+        border-radius: 20px;
+      }
+      .dark-label {
+        background-color: #161d2f;
+      }
+      .light-label {
+        background-color: #f7f7f2;
+      }
+      .third-label {
+        background-color: #8d86c9;
+      }
+    }
   }
 
   &__navigation {
     display: flex;
     flex-direction: column;
     align-items: center;
-    margin-top: 135px;
-    margin-bottom: auto;
     gap: 40px;
   }
 
@@ -90,6 +120,14 @@ nav {
     }
 
     &__main {
+      margin-top: 0;
+      margin-left: 10px;
+      flex-direction: row;
+      align-items: center;
+    }
+
+    &__theme {
+      justify-content: center;
       margin-top: 0;
       margin-left: 10px;
     }
