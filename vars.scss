@@ -9,7 +9,7 @@ $red: #fc4747;
   font-family: "Outfit", sans-serif;
   font-weight: 200; // Легкий
   font-size: 32px;
-  color: #ffffff;
+  color: #ffffffed;
 }
 
 // Шаблон для заголовка M
@@ -17,7 +17,7 @@ $red: #fc4747;
   font-family: "Outfit", sans-serif;
   font-weight: 400; // Обычный
   font-size: 24px;
-  color: #ffffff;
+  color: #ffffffed;
 }
 
 // Шаблон для заголовка S
@@ -25,15 +25,15 @@ $red: #fc4747;
   font-family: "Outfit", sans-serif;
   font-weight: 400; // Обычный
   font-size: 24px;
-  color: #ffffff;
+  color: #ffffffed;
 }
 
 // Шаблон для заголовка XS
 @mixin heading-XS {
   font-family: "Outfit", sans-serif;
   font-weight: 300; // Легкий
-  font-size: 18px;
-  color: #ffffff;
+  font-size: 20px;
+  color: #ffffffed;
 }
 
 @mixin text-M {
@@ -46,7 +46,7 @@ $red: #fc4747;
 @mixin text-S {
   font-family: "Outfit", sans-serif;
   font-weight: 300; // Легкий
-  font-size: 13px;
+  font-size: 14px;
   color: #ffffff95;
 }
 
