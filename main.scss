@@ -42,7 +42,6 @@ body {
 
   .container-main {
     width: 100%;
-    max-width: 1240px;
     margin: 0 auto;
     display: grid;
     grid-template-columns: repeat(4, 1fr);
@@ -95,7 +94,9 @@ body {
           &:last-child {
             margin-right: 0;
           }
-
+          @media screen and (max-width: 768px){
+            margin-right: 14px;
+          }
           @media screen and (max-width: 376px) {
             margin-right: 12px;
           }
@@ -113,17 +114,20 @@ body {
           margin-left: 5px;
           top: 50%;
           transform: translateY(-50%);
+          @media screen and (max-width: 768px){
+            content: none;
+          }
         }
 
         .movieYear::after {
           left: 35px;
         }
 
-        @media screen and (max-width: 376px) {
-          .movieCategory::before {
-            display: none;
+        @media screen and (max-width: 768px) {
+            .movieCategory::before {
+              display: none;
+            }
           }
-        }
       }
 
       .movieTitle {
