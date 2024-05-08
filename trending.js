@@ -1,31 +1,49 @@
+const api_url_trending =
+  "https://kinopoiskapiunofficial.tech/api/v2.2/films/collections?type=TOP_POPULAR_ALL&page=1";
+
+getTrending(api_url_trending);
+
+async function getTrending(url) {
+  try {
+    const resp = await fetch(url, {
+      headers: {
+        "Content-Type": "application/json",
+        "X-API-KEY": "475b780a-eb7a-4f03-ab2c-288319493865",
+      },
+    });
+    const respData = await resp.json();
+    createTrendingMoviesSection(respData);
+  } catch (error) {
+    (document.getElementById("error").textContent = "Error trending movies:"),
+      error;
+    document.getElementById("result").textContent = "";
+  } finally {
+    document.getElementById("finallyResult").textContent = "Please try later";
+  }
+}
+
 function createTrendingMoviesSection(data) {
   const trendingMoviesContainer = document.querySelector(
     ".trendingMoviesContainer"
   );
-  if (data.length === 0) {
-    const paragraph = document.createElement("p");
-    paragraph.innerText = "No movies or TV series found";
-    paragraph.classList.add("notFoundText");
-    trendingMoviesContainer.appendChild(paragraph);
-  }
-  data.forEach((movie) => {
+
+  data.items.forEach((movie) => {
     const movieCard = document.createElement("div");
     movieCard.classList.add("movieCardNew");
 
     const movieImg = document.createElement("img");
     movieImg.classList.add("movieCoverNew");
-    movieImg.src =
-      movie.thumbnail &&
-      movie.thumbnail.regular &&
-      movie.thumbnail.regular.medium;
+    movieImg.src = movie.posterUrlPreview;
     movieImg.alt = movie.title;
 
     const infoElement = document.createElement("div");
     infoElement.classList.add("movieInfoNew");
     infoElement.innerHTML = `  <p class = "year">${movie.year}</p>
-    <p class = "category">${movie.category}</p>
-    <p class = "rating">${movie.rating}</p>
-    <p class = "title">${movie.title}</p>`;
+    <p class = "category">${movie.type}</p>
+    <p class = "rating">${movie.ratingKinopoisk}</p>
+    <p class = "title">${
+      movie.nameOriginal ? movie.nameOriginal : movie.nameRu
+    }</p>`;
 
     // modal
     const playButton = document.createElement("button");
@@ -45,19 +63,8 @@ function createTrendingMoviesSection(data) {
       disableScroll();
     });
     // modal
-    const bookmarkIcon = document.createElement("img");
-    bookmarkIcon.src = movie.isBookmarked
-      ? "./assets/icon-bookmark-full.svg"
-      : "./assets/icon-bookmark-empty.svg";
-    bookmarkIcon.alt = movie.isBookmarked ? "Bookmark(full)" : "Bookmark";
-    bookmarkIcon.classList.add("bookmarkIcon");
-
-    const bookmarkContainer = document.createElement("div");
-    bookmarkContainer.classList.add("bookmarkContainer");
-    bookmarkContainer.appendChild(bookmarkIcon);
 
     movieCard.appendChild(movieImg);
-    movieCard.appendChild(bookmarkContainer);
     movieCard.appendChild(infoElement);
     trendingMoviesContainer.appendChild(movieCard);
     movieCard.appendChild(playButton);
@@ -110,13 +117,13 @@ function closeModal() {
   wrapperMain.removeChild(modalBackdrop);
 }
 
-function disableScroll(){
+function disableScroll() {
   document.body.classList.add("disable-scroll");
 }
 
-function enableScroll(){
+function enableScroll() {
   document.body.classList.remove("disable-scroll");
-};
+}
 
 const container = document.querySelector(".trendingMoviesContainer");
 let isDown = false;
