@@ -16,21 +16,20 @@ fetch("./data.json")
       });
     }
 
-/////////Создание DOM элементов для секции trending////////////////////////////////
+    /////////Создание DOM элементов для секции trending////////////////////////////////
 
     createDOMStructure(movies);
-    const trendingMovies = data.filter((movie) => movie.isTrending);
+    // const trendingMovies = data.filter((movie) => movie.isTrending);
     if (searchWord) {
       trendingMovies = trendingMovies.filter((movie) => {
         return movie.title.toLowerCase().includes(searchWord.toLowerCase());
       });
     }
-    createTrendingMoviesSection(trendingMovies);
+    // createTrendingMoviesSection(trendingMovies);
   })
   .catch((error) => {
     console.error("Ошибка загрузки или обработки JSON:", error);
   });
-
 
 /////////Создание DOM элементов для секции recommended////////////////////////////////
 
@@ -117,11 +116,9 @@ function createDOMStructure(data) {
   });
 }
 
-    ///////////////////////////////Модальные окна//////////////////////
+///////////////////////////////Модальные окна//////////////////////
 
-
-
-    /////////Открытие и структура модального окна////////////////////////////////
+/////////Открытие и структура модального окна////////////////////////////////
 
 function openModal(movie) {
   const modalBackdrop = document.createElement("div");
@@ -154,7 +151,7 @@ function openModal(movie) {
   movieDescription.textContent = movie.description;
   modalContent.appendChild(movieDescription);
 
-///////////////////////Кнопка закрытия/////////////////////////////
+  ///////////////////////Кнопка закрытия/////////////////////////////
 
   const closeButton = document.createElement("button");
   closeButton.classList.add("closeButton");
@@ -164,23 +161,23 @@ function openModal(movie) {
     enableScroll();
   });
   modalContent.appendChild(closeButton);
-};
+}
 
-    /////////Закрытие модального окна////////////////////////////////
+/////////Закрытие модального окна////////////////////////////////
 
 function closeModal() {
   const modalBackdrop = document.querySelector(".modal-backdrop");
   wrapperMain.removeChild(modalBackdrop);
   //enableScroll();
-};
+}
 
-    /////////Поведение прокрутки при открытом/закрытом модальном окне/////////////////.////
+/////////Поведение прокрутки при открытом/закрытом модальном окне/////////////////.////
 
-function disableScroll(){
+function disableScroll() {
   document.body.classList.add("disable-scroll");
-};
+}
 
-function enableScroll(){
+function enableScroll() {
   console.log("Scroll enabled");
   document.body.classList.remove("disable-scroll");
-};
+}
