@@ -1,50 +1,51 @@
 @import "vars";
 @import "modal_windows";
-@import "trending";
+@import "./assets/style/trending.scss";
 @import "side-nav";
+@import "pagination";
 
 * {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
 }
 
-body{
-    background-color: $dark-blue;
+body {
+  background-color: $dark-blue;
 }
 
 .wrapper-main {
-    margin: 30px;
+  margin: 30px;
 
-    @media screen and (max-width: 376px) {
+  @media screen and (max-width: 376px) {
     margin-top: 10px;
-    }
+  }
 
-    @media screen and (max-width: 768px) {
+  @media screen and (max-width: 768px) {
     margin-top: 15px;
-    }
-
-    .titleRecom {
+  }
+  .modal-backdrop {
+    z-index: 5;
+  }
+  .titleRecom {
     @include heading-L;
     margin-bottom: 30px;
     padding: 10px;
 
     @media screen and (max-width: 376px) {
-        font-size: 20px;
-        font-weight: 300;
-        line-height: 25px;
-        margin-bottom: 10px;
+      font-size: 20px;
+      font-weight: 300;
+      line-height: 25px;
+      margin-bottom: 10px;
     }
-    }
+  }
 
-    .container {
+  .container-main {
     width: 100%;
-    max-width: 1240px;
     margin: 0 auto;
     display: grid;
     grid-template-columns: repeat(4, 1fr);
     grid-template-rows: repeat(6, auto);
-    gap: 20px;
     justify-content: center;
     align-content: center;
 
@@ -56,72 +57,13 @@ body{
     }
 
     .movieCard {
-      width: 100%;
+      width: 80%;
       border-radius: 10px;
       padding: 10px;
 
       &:hover {
         cursor: pointer;
         transform: scale(1.05);
-      }
-
-      .bookmarkContainer {
-        position: absolute;
-        top: 20px;
-        right: 18px;
-        background: rgb(16, 20, 30);
-        opacity: 0.5;
-        width: 32px;
-        height: 32px;
-        border-radius: 20px;
-        z-index: 1;
-        display: flex;
-        flex-wrap: nowrap;
-        justify-content: center;
-        align-items: center;
-        @media screen and (max-width: 376px){
-            top: 14px;
-            right: 16px;
-            width: 20px;
-            height: 20px;
-
-        }
-        .bookmarkIcon {
-            width: 12px;
-            height: 14px;
-            @media screen and (max-width: 376px){
-                width: 8px;
-                height: 10px;
-            }
-        }
-      }
-      .playButton {
-        display: none;
-        position: absolute;
-        background-image: url("./assets/icon-play.svg");
-        background-position: 0.7rem center;
-        background-repeat: no-repeat;
-        width: 7rem;
-        height: 2.5rem;
-        top: 40%;
-        left: 50%;
-        transform: translate(-50%, -50%);
-        background-color: rgba(255, 255, 255, 0.314);
-        @include heading-XS;
-        padding: 10px 20px;
-        border: none;
-        border-radius: 3rem;
-        cursor: pointer;
-        text-align: end;
-
-        @media screen and (max-width: 376px) {
-          width: 6rem;
-          height: 2rem;
-          background-position: 0.3rem center;
-          top: 35%;
-          left: 50%;
-          padding-bottom: 2rem;
-        }
       }
 
       .movieCover {
@@ -138,6 +80,8 @@ body{
         width: 100%;
         margin-top: 5px;
         display: flex;
+        flex-direction: row;
+        justify-content: center;
         @include text-S;
 
         .movieYear,
@@ -145,12 +89,14 @@ body{
         .movieRating {
           display: inline-block;
           position: relative;
-          margin-right: 20px;
+          margin-right: 25px;
 
           &:last-child {
             margin-right: 0;
           }
-
+          @media screen and (max-width: 768px){
+            margin-right: 14px;
+          }
           @media screen and (max-width: 376px) {
             margin-right: 12px;
           }
@@ -163,31 +109,35 @@ body{
 
         .movieYear::after,
         .movieCategory::after {
-          content: "•";
+          content: "●";
           position: absolute;
           margin-left: 5px;
           top: 50%;
           transform: translateY(-50%);
+          @media screen and (max-width: 768px){
+            content: none;
+          }
         }
 
         .movieYear::after {
-          left: 26px;
+          left: 35px;
         }
 
-        @media screen and (max-width: 376px) {
-          .movieCategory::before {
-            display: none;
+        @media screen and (max-width: 768px) {
+            .movieCategory::before {
+              display: none;
+            }
           }
-        }
       }
 
       .movieTitle {
-        margin-top: 10px;
+        margin: 15px 0;
+        text-align: center;
         @include heading-XS;
         @media screen and (max-width: 376px) {
           margin-top: 7px;
           @include text-S;
-          color: white;
+          color: $title;
         }
         &:hover {
           cursor: pointer;
@@ -213,6 +163,7 @@ body{
       font-family: "Outfit", sans-serif;
       font-weight: 300;
       font-size: 24px;
+      background-color: $dark-blue;
       @media screen and (max-width: 376px) {
         font-size: 16px;
       }
@@ -222,7 +173,7 @@ body{
       &:focus {
         outline: none;
         border-bottom: 1px solid #979797;
-        caret-color: #fc4747;
+        caret-color: $red;
       }
     }
   }

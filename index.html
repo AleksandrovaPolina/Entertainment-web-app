@@ -1,9 +1,9 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" class="dark">
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <link rel="shortcut icon" href="./assets/clapperboard.png"/>
+    <link rel="shortcut icon" href="./assets/clapperboard.png" />
     <link rel="stylesheet" href="./assets/style/GlobalStyle/normalize.css" />
     <link rel="stylesheet" href="./main.scss" />
     <link rel="stylesheet" href="./side-nav.scss" />
@@ -12,11 +12,44 @@
   <body>
     <div class="wrap">
       <nav>
-        <aside class="nav__bg nav__wrap">
-          <div class="nav__bg nav__main">
+        <div class="nav__wrap nav__bg">
+          <div class="nav__main nav__bg">
             <a class="nav__bg" href="^#">
               <img src="./assets/logo.svg" alt=""
             /></a>
+
+            <div class="nav__theme">
+              <div>
+                <input
+                  type="radio"
+                  name="dark-theme"
+                  class="nav__theme-radio"
+                  id="theme-dark"
+                  value="dark"
+                />
+                <label class="dark-label label" for="theme-dark"></label>
+              </div>
+              <div>
+                <input
+                  type="radio"
+                  name="light-theme"
+                  class="nav__theme-radio"
+                  id="theme-light"
+                  value="light"
+                />
+                <label class="light-label label" for="theme-light"></label>
+              </div>
+              <div>
+                <input
+                  type="radio"
+                  name="third-theme"
+                  class="nav__theme-radio"
+                  id="theme-third"
+                  value="third"
+                />
+                <label class="third-label label" for="theme-third"></label>
+              </div>
+            </div>
           </div>
           <div class="nav__bg nav__navigation">
             <button>
@@ -57,15 +90,13 @@
           </div>
           <div class="nav__bg nav__profile">
             <div class="nav__bg nav__imgBox">
-              <a class="nav__bg" href="./profile-page.html"
+              <a class="nav__bg" href="./login.html"
                 ><img class="nav__bg" src="./assets/image-avatar.png" alt=""
               /></a>
             </div>
           </div>
-        </aside>
+        </div>
       </nav>
-
-      <!-- Display recommended shows -->
 
       <div class="wrapper-main">
         <form class="searchForm" id="searchForm">
@@ -80,19 +111,22 @@
             placeholder="Search for movies or TV series"
           />
         </form>
-        <!-- Display trending shows -->
         <div class="trendingMovies">
           <h2 class="trendingTitle">Trending</h2>
           <div class="trendingMoviesContainer"></div>
+          <div id="error"></div>
+          <div id="finallyResult"></div>
         </div>
-        <!-- Display trending shows -->
+        <!-- Display recommended shows -->
         <h2 class="titleRecom">Recommended for you</h2>
-        <div class="container"></div>
-      </div>
+        <div class="container-main">
+          <div class="errorMessage"></div>
+        </div>
     </div>
 
     <script src="main.js"></script>
     <script src="side-nav.js"></script>
     <script src="trending.js"></script>
+    <script src="color-theme.js"></script>
   </body>
 </html>

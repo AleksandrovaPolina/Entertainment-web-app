@@ -1,154 +1,171 @@
-let movies;
-const urlParams = new URLSearchParams(window.location.search);
-const searchWord = urlParams.get("inputSearch");
-document.getElementById("inputSearch").value = searchWord;
-const wrapperMain = document.querySelector(".wrapper-main");
 
-fetch("./data.json")
-  .then((res) => res.json())
-  .then((data) => {
-    movies = data.filter((movie) => !movie.isTrending);
-    if (searchWord) {
-      movies = movies.filter((movie) => {
-        return movie.title.toLowerCase().includes(searchWord.toLowerCase());
-      });
-    }
-    createDOMStructure(movies);
-    let trendingMovies = data.filter((movie) => movie.isTrending);
-    if (searchWord) {
-      trendingMovies = trendingMovies.filter((movie) => {
-        return movie.title.toLowerCase().includes(searchWord.toLowerCase());
-      });
-    }
-    createTrendingMoviesSection(trendingMovies);
-  })
-  .catch((error) => {
-    console.error("Ошибка загрузки или обработки JSON:", error);
-  });
+// Функция для получения фильмов из API
+document.addEventListener("DOMContentLoaded", function() {
+    const api_key = "7abb31d8-f85d-47c0-97bc-f25c197dd055";
+    const api_url_modal = "https://kinopoiskapiunofficial.tech/api/v2.2/films/";
+    const wrapperMain = document.querySelector(".wrapper-main");
+    let totalPages = 0;
 
-function createDOMStructure(data) {
-  if (data.length === 0) {
-    const container = document.querySelector(".container");
-    const paragraph = document.createElement("p");
-    paragraph.innerText = "No movies or TV series found";
-    paragraph.classList.add("notFoundText");
-    container.appendChild(paragraph);
-  }
-  data.forEach((movie) => {
-    const container = document.querySelector(".container");
-    const movieElement = document.createElement("div");
-    movieElement.classList.add("movieCard");
-
-    const movieImg = document.createElement("img");
-    movieImg.classList.add("movieCover");
-    movieImg.src =
-      movie.thumbnail &&
-      movie.thumbnail.regular &&
-      movie.thumbnail.regular.medium;
-    movieImg.alt = movie.title;
-
-    const bookmarkIcon = document.createElement("img");
-    bookmarkIcon.src = movie.isBookmarked
-      ? "./assets/icon-bookmark-full.svg"
-      : "./assets/icon-bookmark-empty.svg";
-    bookmarkIcon.alt = movie.isBookmarked ? "Bookmark(full)" : "Bookmark";
-    bookmarkIcon.classList.add("bookmarkIcon");
-
-    const bookmarkContainer = document.createElement("div");
-    bookmarkContainer.classList.add("bookmarkContainer");
-    bookmarkContainer.appendChild(bookmarkIcon);
-
-    const playButton = document.createElement("button");
-    playButton.classList.add("playButton");
-    playButton.textContent = "Play";
-
-    movieElement.addEventListener("mouseenter", () => {
-      playButton.style.display = "block";
-    });
-
-    movieElement.addEventListener("mouseleave", () => {
-      playButton.style.display = "none";
-    });
-
-    playButton.addEventListener("click", () => {
-      openModal(movie);
-    });
+    async function getMovies(page) {
+      const api_url = `https://kinopoiskapiunofficial.tech/api/v2.2/films?countries=1&genres=1&order=RATING&type=ALL&ratingFrom=0&ratingTo=10&yearFrom=2000&yearTo=2024&page=${page}`;
+      try{
+        const res = await fetch(api_url, {
+          headers: {
+            'X-API-KEY': api_key,
+            'Content-Type': 'application/json',
+          },
+        });
     
+        if(!res.ok){
+          throw new Error (`Request failed: ${res.status}`)
+        }
+        const resData = await res.json();
+        totalPages = resData.pagesCount;
+        viewMovies(resData);
+      }
+    
+      catch(error) {
+        //document.querySelector('.errorMessage').textContent = error.message;
+      }
+    }
+    
+    // Функция для отображения фильмов на странице
+    
+    function viewMovies(data){
+      const containerMain = document.querySelector(".container-main");
+      containerMain.innerHTML = ''; 
+      
+      data.items.forEach((movie) => {
+        const movieCard = document.createElement("div");
+        movieCard.classList.add("movieCard");
+        movieCard.setAttribute("id", `${movie.kinopoiskId}`)
+        movieCard.innerHTML = `
+          <img src="${movie.posterUrlPreview}" 
+          alt="${movie.nameOriginal}" 
+          class="movieCover">
+          <div class="movieInfo">
+          <p class="movieYear">${movie.year}</p>
+          <p class="movieCategory">${movie.type.toLowerCase().replace('_', ' ').charAt(0).toUpperCase() + movie.type.toLowerCase().replace('_', ' ').slice(1)}</p>
+          <p class="movieRating">${movie.ratingImdb}/10</p>
+          </div>
+          <h3 class="movieTitle">${movie.nameOriginal}</h3>`;
+          movieCard.addEventListener('click', () => openModal(movie));
+        containerMain.appendChild(movieCard);
+      });
+}
 
-    const infoElement = document.createElement("div");
-    infoElement.classList.add("movieInfo");
+const modalElement  = document.createElement("div");
+modalElement.classList.add("modal-backdrop");
 
-    const yearElement = document.createElement("p");
-    yearElement.classList.add("movieYear");
-    yearElement.textContent = movie.year;
 
-    const categoryElement = document.createElement("p");
-    categoryElement.classList.add("movieCategory");
-    categoryElement.textContent = movie.category;
+    async function openModal(movie){
+      const id = movie.kinopoiskId;
 
-    const ratingElement = document.createElement("p");
-    ratingElement.classList.add("movieRating");
-    ratingElement.textContent = movie.rating;
+      const res = await fetch(api_url_modal + id, {
+        headers: {
+          'X-API-KEY': api_key,
+          'Content-Type': 'application/json',
+        },
+      })
+      const resData = await res.json(); 
 
-    const titleElement = document.createElement("h3");
-    titleElement.classList.add("movieTitle");
-    titleElement.textContent = movie.title;
+      const modalElement  = document.createElement("div");
+      modalElement.classList.add("modal-backdrop");
+      const modalContent = document.createElement("div");
+      modalContent.classList.add("modal-content");
 
-    wrapperMain.appendChild(container);
-    container.appendChild(movieElement);
-    movieElement.appendChild(movieImg);
-    movieElement.appendChild(bookmarkContainer);
-    infoElement.appendChild(yearElement);
-    infoElement.appendChild(categoryElement);
-    infoElement.appendChild(ratingElement);
-    movieElement.appendChild(infoElement);
-    movieElement.appendChild(titleElement);
-    movieElement.appendChild(playButton);
+      const movieImg = document.createElement("img");
+      movieImg.classList.add("modal-movie-img");
+      movieImg.src = resData.posterUrl; 
+      movieImg.alt= resData.nameOriginal;
+  
+      const movieTitle = document.createElement("h2");
+      movieTitle.classList.add("modal-title");
+      movieTitle.textContent = resData.nameOriginal;
+  
+      const movieInfo = document.createElement("div");
+      movieInfo.classList.add("movieInfo");
+      
+      const movieYear = document.createElement("p");
+      movieYear.classList.add("modal-year");
+      movieYear.textContent = resData.year;
+  
+      const movieGenre = document.createElement("p");
+      movieGenre.classList.add("modal-genre");
+      movieGenre.textContent = `Жанр: ${resData.genres.map((el) => el.genre).join(", ")}`;
+  
+      const movieDescription = document.createElement("p");
+      movieDescription.classList.add("modal-description");
+      movieDescription.textContent = resData.description;
+  
+      const closeButton = document.createElement("button");
+      closeButton.classList.add("closeButton");
+      closeButton.textContent = "x";
+  
+      modalContent.appendChild(movieImg);
+      modalContent.appendChild(movieTitle);
+      modalContent.appendChild(movieYear);
+      modalContent.appendChild(movieGenre);
+      modalContent.appendChild(movieDescription);
+      modalContent.appendChild(closeButton);
+      modalElement.appendChild(modalContent);
+      wrapperMain.appendChild(modalElement);     
+
+      const closeBtn = document.querySelector(".closeButton");
+      closeBtn.addEventListener('click', () => closeModal());
+    }
+
+    function closeModal(){
+      const modalBackdrop = document.querySelector(".modal-backdrop");
+      wrapperMain.removeChild(modalBackdrop);
+    }
+
+    window.addEventListener("click", (e) => {
+      if (e.target != modalElement) {
+        closeModal();
+      }
+    })
+    window.addEventListener("keydown", (e) => {
+      if (e.key === "Escape") {
+        closeModal();
+      }
+    })
+    
+    ////////////////////////////Пагинация/////////////////////////////////////////////////
+    
+    function createPagination(){
+      let currentPage = 1;
+      function handlePrevPage() {
+        if (currentPage > 1) {
+          currentPage--;
+          getMovies(currentPage);
+        }
+      }
+      
+      function handleNextPage() {
+        currentPage++;
+        getMovies(currentPage);
+      }
+      
+      getMovies(currentPage);
+      
+      const paginationContainer = document.createElement("div");
+      paginationContainer.classList.add("pagination");
+      
+      const prevButton = document.createElement("button");
+      prevButton.classList.add("btnPage");
+      prevButton.textContent = "<Previous";
+      prevButton.addEventListener("click", handlePrevPage);
+      
+      const nextButton = document.createElement("button");
+      nextButton.classList.add("btnPage");
+      nextButton.textContent = "Next>";
+      nextButton.addEventListener("click", handleNextPage);
+      
+      paginationContainer.appendChild(prevButton);
+      paginationContainer.appendChild(nextButton);
+      
+      wrapperMain.appendChild(paginationContainer);  
+    }
+    createPagination();
   });
-}
-
-function openModal(movie) {
-  const modalBackdrop = document.createElement("div");
-  modalBackdrop.classList.add("modal-backdrop");
-  wrapperMain.appendChild(modalBackdrop);
-
-  const modalContent = document.createElement("div");
-  modalContent.classList.add("modal-content");
-  modalBackdrop.appendChild(modalContent);
-
-  const movieImg = document.createElement("img");
-  movieImg.classList.add("modal-movie-img");
-  movieImg.src =
-    movie.thumbnail && movie.thumbnail.regular && movie.thumbnail.regular.large;
-  movieImg.alt = movie.title;
-  modalContent.appendChild(movieImg);
-
-  const movieTitle = document.createElement("h2");
-  movieTitle.classList.add("modal-title");
-  movieTitle.textContent = movie.title;
-  modalContent.appendChild(movieTitle);
-
-  const movieDirector = document.createElement("p");
-  movieDirector.classList.add("modal-director");
-  movieDirector.textContent = "Director: " + movie.director;
-  modalContent.appendChild(movieDirector);
-
-  const movieDescription = document.createElement("p");
-  movieDescription.classList.add("modal-description");
-  movieDescription.textContent = movie.description;
-  modalContent.appendChild(movieDescription);
-
-  const closeButton = document.createElement("button");
-  closeButton.classList.add("closeButton");
-  closeButton.textContent = "×";
-  closeButton.addEventListener("click", closeModal);
-  modalContent.appendChild(closeButton);
-
-  wrapperMain.classList.add("modal-open");
-}
-
-function closeModal() {
-  const modalBackdrop = document.querySelector(".modal-backdrop");
-  wrapperMain.removeChild(modalBackdrop);
-  wrapperMain.classList.remove("modal-open");
-}
