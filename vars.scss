@@ -38,7 +38,7 @@ html.third {
   font-family: "Outfit", sans-serif;
   font-weight: 200; // Легкий
   font-size: 32px;
-  color: $title;
+  color: #ffffff;
 }
 
 // Шаблон для заголовка M
@@ -46,7 +46,7 @@ html.third {
   font-family: "Outfit", sans-serif;
   font-weight: 400; // Обычный
   font-size: 24px;
-  color: $title;
+  color: #ffffff;
 }
 
 // Шаблон для заголовка S
@@ -54,7 +54,7 @@ html.third {
   font-family: "Outfit", sans-serif;
   font-weight: 400; // Обычный
   font-size: 24px;
-  color: #ffffff;
+  color: #ffffffed;
 }
 
 // Шаблон для заголовка XS
@@ -62,7 +62,7 @@ html.third {
   font-family: "Outfit", sans-serif;
   font-weight: 300; // Легкий
   font-size: 18px;
-  color: $title;
+  color: #ffffff;
 }
 
 @mixin text-M {
@@ -75,14 +75,14 @@ html.third {
 @mixin text-S {
   font-family: "Outfit", sans-serif;
   font-weight: 300; // Легкий
-  font-size: 13px;
-  color: $text;
+  font-size: 15px;
+  color: #ffffff95;
 }
 
 @mixin text-login {
   font-family: "Outfit", sans-serif;
   font-weight: 300; // Легкий
-  font-size: 15px;
+  font-size: 13px;
   color: white;
 }
 

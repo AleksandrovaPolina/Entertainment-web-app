@@ -1,0 +1,14 @@
+@import 'vars';
+.pagination{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    .btnPage{
+    @include text-M;
+        padding: 3rem;
+        &:hover{
+            color: white;
+        }
+    }
+}
