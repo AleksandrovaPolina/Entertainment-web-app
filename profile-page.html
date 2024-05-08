@@ -7,6 +7,7 @@
     <link rel="stylesheet" href="./assets/style/GlobalStyle/normalize.css" />
     <link rel="stylesheet" href="./main.scss" />
     <link rel="stylesheet" href="./side-nav.scss" />
+    <link rel="stylesheet" href="./profile-style.scss">
     <title>Entertainment web app</title>
   </head>
   <body>
@@ -50,49 +51,53 @@
               <img
                 class="nav__bg nav__icon nav__icon-bookmark"
                 src="./assets/icon-nav-bookmark.svg"
-                alt="Bppkmark icon"
+                alt="Bookmark icon"
                 data-alt="./assets/icon-bookmark-full.svg"
               />
             </button>
           </div>
           <div class="nav__bg nav__profile">
             <div class="nav__bg nav__imgBox">
-              <a class="nav__bg" href="./profile-page.html"
+              <a class="nav__bg" href="#"
                 ><img class="nav__bg" src="./assets/image-avatar.png" alt=""
               /></a>
             </div>
           </div>
         </aside>
       </nav>
-
-      <!-- Display recommended shows -->
-
       <div class="wrapper-main">
-        <form class="searchForm" id="searchForm">
-          <button class="searchButton" type="submit">
-            <img src="/assets/icon-search.svg" alt="search" />
-          </button>
-          <input
-            name="inputSearch"
-            id="inputSearch"
-            type="text"
-            class="inputSearch"
-            placeholder="Search for movies or TV series"
-          />
-        </form>
-        <!-- Display trending shows -->
-        <div class="trendingMovies">
-          <h2 class="trendingTitle">Trending</h2>
-          <div class="trendingMoviesContainer"></div>
-        </div>
-        <!-- Display trending shows -->
-        <h2 class="titleRecom">Recommended for you</h2>
-        <div class="container"></div>
-      </div>
     </div>
-
-    <script src="main.js"></script>
+    <div>
+        <h1>Profile settings</h1>
+        
+        <div class="card1 cardAcc">
+          <div class="cardAvatar">
+            <img src="./assets/image-avatar.png" alt="avatar">
+            <div class="divBut hide">...</div>
+          </div>  
+          <div><p class="card1-head">Account</p>
+            <p>Email address:</p>
+            <p>Password:</p>
+            <p>Nickname:</p>
+          </div>
+        </div>
+        <div class="card1">
+          <p class="card1-head">Subscription</p>
+            <p>Your subscription will expire in ... days</p>
+            <p>on ...</p>
+        </div>
+        <div class="card1">
+          <p class="card1-head">Devices</p>
+            <p>Recent devices:</p>
+        </div>
+        <div class="card1">
+          <p class="card1-head">Info</p>
+            <p>Version:</p>
+            <p>Platform:</p>
+            <p>Current time:</p>
+        </div>
+    </div>
     <script src="side-nav.js"></script>
-    <script src="trending.js"></script>
+    <script src="profile-page.js"></script>
   </body>
 </html>
