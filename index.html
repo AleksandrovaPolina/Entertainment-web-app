@@ -25,7 +25,8 @@
                   name="dark-theme"
                   class="nav__theme-radio"
                   id="theme-dark"
-                  value="dark" />
+                  value="dark"
+                />
                 <label class="dark-label label" for="theme-dark"></label>
               </div>
               <div>
@@ -34,7 +35,8 @@
                   name="light-theme"
                   class="nav__theme-radio"
                   id="theme-light"
-                  value="light" />
+                  value="light"
+                />
                 <label class="light-label label" for="theme-light"></label>
               </div>
               <div>
@@ -43,7 +45,8 @@
                   name="third-theme"
                   class="nav__theme-radio"
                   id="theme-third"
-                  value="third" />
+                  value="third"
+                />
                 <label class="third-label label" for="theme-third"></label>
               </div>
             </div>
@@ -54,7 +57,8 @@
                 class="nav__bg nav__icon nav__icon-home"
                 src="./assets/icon-nav-home.svg"
                 alt="Home"
-                data-alt="./assets/icon-nav-home.svg" />
+                data-alt="./assets/icon-nav-home.svg"
+              />
             </button>
 
             <button>
@@ -62,7 +66,8 @@
                 class="nav__bg nav__icon nav__icon-movie"
                 src="./assets/icon-nav-movies.svg"
                 alt="Movie-icon"
-                data-alt="./assets/icon-category-movie.svg" />
+                data-alt="./assets/icon-category-movie.svg"
+              />
             </button>
 
             <button>
@@ -70,7 +75,8 @@
                 class="nav__bg nav__icon nav__icon-series"
                 src="./assets/icon-nav-tv-series.svg"
                 alt="Series-icon"
-                data-alt="./assets/icon-category-tv.svg" />
+                data-alt="./assets/icon-category-tv.svg"
+              />
             </button>
 
             <button>
@@ -78,7 +84,8 @@
                 class="nav__bg nav__icon nav__icon-bookmark"
                 src="./assets/icon-nav-bookmark.svg"
                 alt="Bppkmark icon"
-                data-alt="./assets/icon-bookmark-full.svg" />
+                data-alt="./assets/icon-bookmark-full.svg"
+              />
             </button>
           </div>
           <div class="nav__bg nav__profile">
@@ -101,12 +108,14 @@
             id="inputSearch"
             type="text"
             class="inputSearch"
-            placeholder="Search for movies or TV series" />
+            placeholder="Search for movies or TV series"
+          />
         </form>
-        <!-- Display trending shows -->
         <div class="trendingMovies">
           <h2 class="trendingTitle">Trending</h2>
           <div class="trendingMoviesContainer"></div>
+          <div id="error"></div>
+          <div id="finallyResult"></div>
         </div>
         <!-- Display recommended shows -->
         <h2 class="titleRecom">Recommended for you</h2>
