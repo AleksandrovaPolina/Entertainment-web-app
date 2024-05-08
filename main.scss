@@ -133,7 +133,7 @@ body {
         @media screen and (max-width: 376px) {
           margin-top: 7px;
           @include text-S;
-          color: white;
+          color: $title;
         }
         &:hover {
           cursor: pointer;
@@ -169,7 +169,7 @@ body {
       &:focus {
         outline: none;
         border-bottom: 1px solid #979797;
-        caret-color: #fc4747;
+        caret-color: $red;
       }
     }
   }
