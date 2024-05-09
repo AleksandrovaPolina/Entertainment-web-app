@@ -9,22 +9,6 @@ const warningServer = document.querySelector('.warning_server');
 const btn = document.querySelector('.form__btn');
 
 
-
-async function checkUser(){
-    try{
-        const resp = await fetch('http://localhost:3001/userData');
-        const data = await resp.json();
-        const getUsers = data.find(item => item.email === emailInput.value)
-        if(!getUsers){
-            signUp()
-        } else{
-            warningError.classList.remove('none');
-        }
-    }catch(error){
-        console.error(error);
-    }
-}
-
 function checkInputs(){
     if(emailInput.value.trim() === '' || passInput.value.trim() === '' || passSecondInput.value.trim() === ''){
         warningInputMessage.classList.remove('none');
@@ -42,6 +26,23 @@ function checkInputs(){
         checkUser()
     }
 }
+
+async function checkUser(){
+    try{
+        const resp = await fetch('http://localhost:3001/userData');
+        const data = await resp.json();
+        const getUsers = data.find(item => item.email === emailInput.value)
+        if(!getUsers){
+            signUp()
+        } else{
+            warningError.classList.remove('none');
+        }
+    }catch(error){
+        console.error(error);
+    }
+}
+
+
 
 
 function signUp(){
