@@ -43,26 +43,111 @@ function createTrendingMoviesSection(data) {
       movie.nameOriginal ? movie.nameOriginal : movie.nameRu
     }</p>`;
 
-    // movieCard.addEventListener("click", () => openModal(movie.kinopoiskId));
+    // modal
+    const playButton = document.createElement("button");
+    playButton.classList.add("playButton");
+    playButton.textContent = "More info";
+
+    movieCard.addEventListener("mouseenter", () => {
+      playButton.style.display = "block";
+    });
+
+    movieCard.addEventListener("mouseleave", () => {
+      playButton.style.display = "none";
+    });
+
+    playButton.addEventListener("click", () => {
+      openModal(movie);
+      disableScroll();
+    });
+    // modal
+
     movieCard.appendChild(movieImg);
     movieCard.appendChild(infoElement);
     trendingMoviesContainer.appendChild(movieCard);
+    movieCard.appendChild(playButton);
   });
 }
 
 // modal
-// const modalEl = document.querySelector(".modal");
+const modalElement = document.createElement("div");
+modalElement.classList.add("modal-backdrop");
 
-// async function openModal(id) {
-//   modalEl.classList.add("modal--show");
+async function openModal(movie) {
+  const id = movie.kinopoiskId;
 
-//   modalEl.innerHTML = `
-//   <p class = "year"></p>
-//   <p class = "category"></p>
-//   <p class = "rating"></p>
-//   <p class = "title"></p>
-// `;
-// }
+  const res = await fetch(api_url_trending + id, {
+    headers: {
+      "X-API-KEY": "475b780a-eb7a-4f03-ab2c-288319493865",
+      "Content-Type": "application/json",
+    },
+  });
+  const resData = await res.json();
+
+  const modalElement = document.createElement("div");
+  modalElement.classList.add("modal-backdrop");
+  const modalContent = document.createElement("div");
+  modalContent.classList.add("modal-content");
+
+  const movieImg = document.createElement("img");
+  movieImg.classList.add("modal-movie-img");
+  movieImg.src = resData.posterUrl;
+  movieImg.alt = resData.nameOriginal;
+
+  const movieTitle = document.createElement("h2");
+  movieTitle.classList.add("modal-title");
+  movieTitle.textContent = resData.nameOriginal;
+
+  const movieInfo = document.createElement("div");
+  movieInfo.classList.add("movieInfo");
+
+  const movieYear = document.createElement("p");
+  movieYear.classList.add("modal-year");
+  movieYear.textContent = resData.year;
+
+  const movieGenre = document.createElement("p");
+  movieGenre.classList.add("modal-genre");
+  movieGenre.textContent = `Жанр: ${resData.genres
+    .map((el) => el.genre)
+    .join(", ")}`;
+
+  const movieDescription = document.createElement("p");
+  movieDescription.classList.add("modal-description");
+  movieDescription.textContent = resData.description;
+
+  const closeButton = document.createElement("button");
+  closeButton.classList.add("closeButton");
+  closeButton.textContent = "x";
+
+  modalContent.appendChild(movieImg);
+  modalContent.appendChild(movieTitle);
+  modalContent.appendChild(movieYear);
+  modalContent.appendChild(movieGenre);
+  modalContent.appendChild(movieDescription);
+  modalContent.appendChild(closeButton);
+  modalElement.appendChild(modalContent);
+  wrapperMain.appendChild(modalElement);
+
+  const closeBtn = document.querySelector(".closeButton");
+  closeBtn.addEventListener("click", () => closeModal());
+}
+
+function closeModal() {
+  const modalBackdrop = document.querySelector(".modal-backdrop");
+  wrapperMain.removeChild(modalBackdrop);
+}
+
+window.addEventListener("click", (e) => {
+  if (e.target != modalElement) {
+    closeModal();
+  }
+});
+window.addEventListener("keydown", (e) => {
+  if (e.key === "Escape") {
+    closeModal();
+  }
+});
+
 // modal
 
 // Horizontal scroll

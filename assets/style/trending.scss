@@ -12,12 +12,10 @@
 }
 
 .trendingMovies {
-  max-width: 1440px;
-  float: left;
+  width: 100%;
   margin: 0 auto;
   margin-top: 20px;
   margin-bottom: 30px;
-  gap: 20px;
   @media screen and (max-width: 376px) {
     margin-bottom: 10px;
     margin-top: 10px;
@@ -27,6 +25,7 @@
     margin-top: 10px;
   }
   .trendingMoviesContainer {
+    max-width: 1440px;
     display: grid;
     grid-template-columns: repeat(20, 1fr);
     overflow-x: hidden;
@@ -34,6 +33,7 @@
     white-space: nowrap;
     scroll-behavior: auto;
     height: auto;
+    gap: 5px;
 
     .movieCardNew {
       width: 100%;
@@ -52,6 +52,25 @@
       }
       @media screen and (max-width: 768px) {
         width: 200px;
+      }
+      .playButton {
+        display: none;
+        position: absolute;
+        background-position: 0.7rem center;
+        background-repeat: no-repeat;
+        width: 7rem;
+        height: 3rem;
+        top: 40%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        background-color: rgba(139, 135, 135, 0.6);
+        text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.9);
+        @include heading-XS;
+        padding: 10px 20px;
+        border: none;
+        border-radius: 3rem;
+        cursor: pointer;
+        text-align: end;
       }
 
       .movieInfoNew {

@@ -92,7 +92,7 @@ html.third {
 @mixin text-login {
   font-family: "Outfit", sans-serif;
   font-weight: 300; // Легкий
-  font-size: 13px;
+  font-size: 15px;
   color: white;
 }
 
@@ -100,5 +100,5 @@ html.third {
   font-family: "Outfit", sans-serif;
   font-weight: 300; // Легкий
   font-size: 15px;
-  color: $red;
+  color: #fc4747;
 }
