@@ -29,6 +29,11 @@
       "email": "polinaqw086@mail.ru",
       "password": "qwerty",
       "id": 6
+    },
+    {
+      "email": "polina11086@mail.ru",
+      "password": "123456",
+      "id": 7
     }
   ]
 }
