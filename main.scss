@@ -94,7 +94,7 @@ body {
           &:last-child {
             margin-right: 0;
           }
-          @media screen and (max-width: 768px){
+          @media screen and (max-width: 768px) {
             margin-right: 14px;
           }
           @media screen and (max-width: 376px) {
@@ -114,7 +114,7 @@ body {
           margin-left: 5px;
           top: 50%;
           transform: translateY(-50%);
-          @media screen and (max-width: 768px){
+          @media screen and (max-width: 768px) {
             content: none;
           }
         }
@@ -124,10 +124,10 @@ body {
         }
 
         @media screen and (max-width: 768px) {
-            .movieCategory::before {
-              display: none;
-            }
+          .movieCategory::before {
+            display: none;
           }
+        }
       }
 
       .movieTitle {
