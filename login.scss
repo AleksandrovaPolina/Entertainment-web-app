@@ -7,7 +7,7 @@
 }
 
 body{
-    background-color: $dark-blue;
+    background-color: #10141e;   //переменная $dark-blue
 }
 
 .wrapper{
@@ -25,8 +25,7 @@ body{
     display: flex;
     flex-direction: column;
     width: 400px;
-    margin: 0 auto;
-    background-color: $semi-dark-blue;
+    background-color: #161d2f;    //переменная $semi-dark-blue
     color: white;
     padding: 2rem;
     border-radius: 20px;
@@ -42,14 +41,23 @@ body{
 }
 
 .form__input{
-    background-color: $semi-dark-blue;
-    border-bottom: 1px solid $greyish-blue;
+    background-color: #161d2f;    //переменная $semi-dark-blue
+    border-bottom: 1px solid #5a698f;     //переменная $greyish-blue
     border: none;
     outline:none;
-    border-bottom: 1px solid $greyish-blue;
+    border-bottom: 1px solid #5a698f;            //переменная $greyish-blue
     color: white;
-    caret-color : $red;
+    caret-color : #fc4747;                    //переменная $red
     height: 37px;
+}
+
+//цвет бэкграунда и текста при автозаполнении в хроме
+input:-webkit-autofill,
+input:-webkit-autofill:hover, 
+input:-webkit-autofill:focus, 
+input:-webkit-autofill:active{
+    -webkit-box-shadow: 0 0 0 30px #161d2f inset !important;
+    -webkit-text-fill-color: white !important;
 }
 
 .email-input{
@@ -60,15 +68,11 @@ body{
     margin-top: 24px;
 }
 
-::-ms-reveal {  //цвет глазика в инпуте пароль
-    filter: invert(100%);
-  }
-
 .form__btn{
     margin-top: 40px;
     margin-bottom: 24px;
     height: 48px;
-    background-color: $red;
+    background-color: #fc4747;                    //переменная $red
     border: none;
     @include text-login;
     border-radius: 6px;
@@ -76,7 +80,7 @@ body{
 
 .form__btn:hover{
     background-color: white;
-    color: $red;
+    color: #fc4747;                                   //переменная $red
 }
 
 .sign-up__info{
@@ -99,5 +103,12 @@ body{
 }
 }
 
+.warning{
+    @include text-sign-up;
+    text-align: center;
+    margin-top: 10px;
+}
 
-
+.none{
+    display: none;
+}
