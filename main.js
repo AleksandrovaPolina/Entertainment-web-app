@@ -3,10 +3,12 @@ document.addEventListener("DOMContentLoaded", function () {
   const api_key = "7abb31d8-f85d-47c0-97bc-f25c197dd055";
   const api_url_modal = "https://kinopoiskapiunofficial.tech/api/v2.2/films/";
   const wrapperMain = document.querySelector(".wrapper-main");
+  const modalBackdrop = document.createElement("div");
   let totalPages = 0;
 
   async function getMovies(page) {
     const api_url = `https://kinopoiskapiunofficial.tech/api/v2.2/films?countries=1&genres=1&order=RATING&type=ALL&ratingFrom=0&ratingTo=10&yearFrom=2000&yearTo=2024&page=${page}`;
+
     try {
       const res = await fetch(api_url, {
         headers: {
@@ -22,7 +24,10 @@ document.addEventListener("DOMContentLoaded", function () {
       totalPages = resData.pagesCount;
       viewMovies(resData);
     } catch (error) {
-      //document.querySelector('.errorMessage').textContent = error.message;
+      document.querySelector(".errorMessage").innerHTML = `
+      <img class="error-img" src="./assets/gear.png" alt="Gear">
+      <h3 class="error-title">We're sorry.</h3>
+      <p class="error-text">Something went wrong. We're working on the problem. Please try later</p>`;
     }
   }
 
@@ -44,18 +49,20 @@ document.addEventListener("DOMContentLoaded", function () {
           <p class="movieYear">${movie.year}</p>
           <p class="movieCategory">${
             movie.type.toLowerCase().replace("_", " ").charAt(0).toUpperCase() +
-            movie.type.toLowerCase().replace("_", " ").slice(1)
-          }</p>
+            movie.type.toLowerCase().replace("_", " ").slice(1)}</p>
           <p class="movieRating">${movie.ratingImdb}/10</p>
           </div>
-          <h3 class="movieTitle">${movie.nameOriginal}</h3>`;
-      movieCard.addEventListener("click", () => openModal(movie));
+          <h3 class="movieTitle">${movie.nameOriginal}</h3>
+          <button class="playButton">More</button>`;
+
+      movieCard.addEventListener("click", () => {
+        openModal(movie);
+        disableScroll();
+      });
       containerMain.appendChild(movieCard);
     });
   }
 
-  const modalElement = document.createElement("div");
-  modalElement.classList.add("modal-backdrop");
 
   async function openModal(movie) {
     const id = movie.kinopoiskId;
@@ -68,61 +75,35 @@ document.addEventListener("DOMContentLoaded", function () {
     });
     const resData = await res.json();
 
-    const modalElement = document.createElement("div");
-    modalElement.classList.add("modal-backdrop");
-    const modalContent = document.createElement("div");
-    modalContent.classList.add("modal-content");
-
-    const movieImg = document.createElement("img");
-    movieImg.classList.add("modal-movie-img");
-    movieImg.src = resData.posterUrl;
-    movieImg.alt = resData.nameOriginal;
-
-    const movieTitle = document.createElement("h2");
-    movieTitle.classList.add("modal-title");
-    movieTitle.textContent = resData.nameOriginal;
-
-    const movieInfo = document.createElement("div");
-    movieInfo.classList.add("movieInfo");
-
-    const movieYear = document.createElement("p");
-    movieYear.classList.add("modal-year");
-    movieYear.textContent = resData.year;
-
-    const movieGenre = document.createElement("p");
-    movieGenre.classList.add("modal-genre");
-    movieGenre.textContent = `Жанр: ${resData.genres
-      .map((el) => el.genre)
-      .join(", ")}`;
-
-    const movieDescription = document.createElement("p");
-    movieDescription.classList.add("modal-description");
-    movieDescription.textContent = resData.description;
-
-    const closeButton = document.createElement("button");
-    closeButton.classList.add("closeButton");
-    closeButton.textContent = "x";
-
-    modalContent.appendChild(movieImg);
-    modalContent.appendChild(movieTitle);
-    modalContent.appendChild(movieYear);
-    modalContent.appendChild(movieGenre);
-    modalContent.appendChild(movieDescription);
-    modalContent.appendChild(closeButton);
-    modalElement.appendChild(modalContent);
-    wrapperMain.appendChild(modalElement);
-
+    modalBackdrop.classList.add('modal-backdrop');
+    wrapperMain.appendChild(modalBackdrop);
+    modalBackdrop.innerHTML = `
+    <div class="modal-content">
+      <img class="modal-movie-img"
+      src="${resData.posterUrl}" 
+      alt="${resData.nameOriginal}" >
+      <h2 class="modal-title">${resData.nameOriginal}</h2>
+      <p class="modal-year">${resData.year}</p>
+      <p class="modal-genre">Жанр: ${resData.genres.map((el) => el.genre).join(", ")}</p>
+      <p class="modal-description">${resData.description}</p>
+      <button class="closeButton">x</button>
+      </div>`
+    
     const closeBtn = document.querySelector(".closeButton");
-    closeBtn.addEventListener("click", () => closeModal());
+    closeBtn.addEventListener("click", () => {
+      closeModal();
+      enableScroll();
+    });  
   }
 
   function closeModal() {
-    const modalBackdrop = document.querySelector(".modal-backdrop");
     wrapperMain.removeChild(modalBackdrop);
+    enableScroll();
   }
 
   window.addEventListener("click", (e) => {
-    if (e.target != modalElement) {
+    const modalContent = document.querySelector(".modal-content")
+    if (e.target != modalContent) {
       closeModal();
     }
   });
@@ -131,6 +112,15 @@ document.addEventListener("DOMContentLoaded", function () {
       closeModal();
     }
   });
+
+  function disableScroll(){
+    document.body.classList.add("disable-scroll");
+  };
+  
+  function enableScroll(){
+    document.body.classList.remove("disable-scroll");
+  };
+  
 
   ////////////////////////////Пагинация/////////////////////////////////////////////////
 
