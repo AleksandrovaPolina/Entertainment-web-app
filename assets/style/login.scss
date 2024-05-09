@@ -1,4 +1,4 @@
-@import "vars";
+@import "./vars.scss";
 
 *{
     margin: 0;
@@ -7,7 +7,7 @@
 }
 
 body{
-    background-color: #10141e;   //переменная $dark-blue
+    background-color: #10141e;
 }
 
 .wrapper{
@@ -25,7 +25,7 @@ body{
     display: flex;
     flex-direction: column;
     width: 400px;
-    background-color: #161d2f;    //переменная $semi-dark-blue
+    background-color: #161d2f;
     color: white;
     padding: 2rem;
     border-radius: 20px;
@@ -41,13 +41,13 @@ body{
 }
 
 .form__input{
-    background-color: #161d2f;    //переменная $semi-dark-blue
-    border-bottom: 1px solid #5a698f;     //переменная $greyish-blue
+    background-color: #161d2f;
+    border-bottom: 1px solid #5a698f;
     border: none;
     outline:none;
-    border-bottom: 1px solid #5a698f;            //переменная $greyish-blue
+    border-bottom: 1px solid #5a698f;
     color: white;
-    caret-color : #fc4747;                    //переменная $red
+    caret-color : #fc4747;
     height: 37px;
 }
 
@@ -72,7 +72,7 @@ input:-webkit-autofill:active{
     margin-top: 40px;
     margin-bottom: 24px;
     height: 48px;
-    background-color: #fc4747;                    //переменная $red
+    background-color: #fc4747;
     border: none;
     @include text-login;
     border-radius: 6px;
@@ -80,7 +80,7 @@ input:-webkit-autofill:active{
 
 .form__btn:hover{
     background-color: white;
-    color: #fc4747;                                   //переменная $red
+    color: #fc4747;
 }
 
 .sign-up__info{
