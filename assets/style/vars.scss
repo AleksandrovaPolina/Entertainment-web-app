@@ -6,6 +6,16 @@ $red: var(--red);
 $title: var(--title);
 $text: var(--text);
 
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  background-color: $dark-blue;
+}
+
 html.dark {
   --greyish: #5a698f;
   --second-color: #161d2f;
