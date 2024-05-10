@@ -65,38 +65,37 @@
               box-shadow: 0 0 20px rgba(143, 143, 143, 0.5);
             }
           }
-          
-          .playButton {
-            position: absolute;
-            top: 50%;
-            left: 50%;
-            transform: translate(-50%, -50%);
-            width: 7rem;
-            height: 2.5rem;
-            background-color: #8e8e8ed3;
-            @include heading-XS;
-            padding: 10px 20px;
-            border: none;
-            border-radius: 3rem;
-            cursor: pointer;
-            text-align: center;
-            z-index: 1; /* Добавлено */
-          
-            @media screen and (max-width: 376px) {
-              width: 4.5rem;
-              height: 1.3rem;
-              top: 35%;
+            
+            .playButton {
+              opacity: 0;
+              position: absolute;
+              top: 45%;
               left: 50%;
-              padding-bottom: 2rem;
-              @include text-S;
-              color: white;
+              transform: translate(-50%, -50%);
+              width: 8rem;
+              height: 3rem;
+              background-color: rgba(139, 135, 135, 0.6);
+              text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.9);
+              @include heading-XS;
+              padding: 10px 20px;
+              border: none;
+              border-radius: 3rem;
+              cursor: pointer;
+              text-align: center;
+            
+              @media screen and (max-width: 376px) {
+                width: 4.5rem;
+                height: 1.3rem;
+                top: 35%;
+                left: 50%;
+                padding-bottom: 2rem;
+                @include text-S;
+                color: white;
+              }
+              &:hover{
+                opacity: 1;
+              }
             }
-            &:hover{
-              opacity: 1; 
-              box-shadow: 0 0 40px rgba(193, 193, 193, 0.646);
-            }
-          }
-
   
         .movieInfo {
           width: 100%;

@@ -59,7 +59,9 @@
         }
       }
 
-      .modal-year, .modal-genre {
+      .modal-year,
+      .modal-genre,
+      .modal-site {
         @include text-M;
         margin-bottom: 18px;
         overflow-wrap: break-word;
@@ -75,6 +77,15 @@
       }
       .modal-description {
         @include text-S;
+      }
+      .modal-site-link{
+        color: #fd7774;
+        font-size: 20px;
+        text-decoration: none;
+        &:hover{
+          color: #f34f4d;
+          text-decoration: underline;
+        }
       }
       .closeButton {
         position: absolute;

@@ -4,6 +4,7 @@ document.addEventListener("DOMContentLoaded", function () {
   const api_url_modal = "https://kinopoiskapiunofficial.tech/api/v2.2/films/";
   const wrapperMain = document.querySelector(".wrapper-main");
   const modalBackdrop = document.createElement("div");
+  const modalContent = document.querySelector(".modal-content")
   let totalPages = 0;
 
   async function getMovies(page) {
@@ -53,7 +54,7 @@ document.addEventListener("DOMContentLoaded", function () {
           <p class="movieRating">${movie.ratingImdb}/10</p>
           </div>
           <h3 class="movieTitle">${movie.nameOriginal}</h3>
-          <button class="playButton">More</button>`;
+           <button class="playButton">More info</button>`;
 
       movieCard.addEventListener("click", () => {
         openModal(movie);
@@ -66,34 +67,49 @@ document.addEventListener("DOMContentLoaded", function () {
 
   async function openModal(movie) {
     const id = movie.kinopoiskId;
+    try{
+      const res = await fetch(api_url_modal + id, {
+        headers: {
+          "X-API-KEY": api_key,
+          "Content-Type": "application/json",
+        },
+      });
 
-    const res = await fetch(api_url_modal + id, {
-      headers: {
-        "X-API-KEY": api_key,
-        "Content-Type": "application/json",
-      },
-    });
-    const resData = await res.json();
+      if (!res.ok) {
+        throw new Error(`Request failed: ${res.status}`);
+      }
 
-    modalBackdrop.classList.add('modal-backdrop');
-    wrapperMain.appendChild(modalBackdrop);
-    modalBackdrop.innerHTML = `
-    <div class="modal-content">
-      <img class="modal-movie-img"
-      src="${resData.posterUrl}" 
-      alt="${resData.nameOriginal}" >
-      <h2 class="modal-title">${resData.nameOriginal}</h2>
-      <p class="modal-year">${resData.year}</p>
-      <p class="modal-genre">Жанр: ${resData.genres.map((el) => el.genre).join(", ")}</p>
-      <p class="modal-description">${resData.description}</p>
-      <button class="closeButton">x</button>
-      </div>`
-    
-    const closeBtn = document.querySelector(".closeButton");
-    closeBtn.addEventListener("click", () => {
-      closeModal();
-      enableScroll();
-    });  
+      const resData = await res.json();
+      modalBackdrop.classList.add('modal-backdrop');
+      wrapperMain.appendChild(modalBackdrop);
+      modalBackdrop.innerHTML = `
+      <div class="modal-content">
+        <img class="modal-movie-img"
+        src="${resData.posterUrl}" 
+        alt="${resData.nameOriginal}" >
+        <h2 class="modal-title">${resData.nameOriginal}</h2>
+        <p class="modal-year">${resData.year}</p>
+        <p class="modal-genre">Жанр: ${resData.genres.map((el) => el.genre).join(", ")}</p>
+        <p class="modal-site">Трейлер можно посмотреть <a class="modal-site-link" href="${resData.webUrl}/video" target="_blank">здесь</a></p>
+        <p class="modal-description">${resData.description}</p>
+        <button class="closeButton">x</button>
+        </div>`
+      
+      const closeBtn = document.querySelector(".closeButton");
+      closeBtn.addEventListener("click", () => {
+        closeModal();
+        enableScroll();
+      });  
+    }
+    catch(error){
+      const modalError = document.createElement("div");
+      modalError.classList.add("modal-error");
+      modalError.innerHTML = `
+      <img class="error-img" src="./assets/gear.png" alt="Gear">
+      <h3 class="error-title">We're sorry.</h3>
+      <p class="error-text">Something went wrong. We're working on the problem. Please try later</p>`;
+      modalContent.appendChild(modalError);
+    }
   }
 
   function closeModal() {
@@ -102,7 +118,7 @@ document.addEventListener("DOMContentLoaded", function () {
   }
 
   window.addEventListener("click", (e) => {
-    const modalContent = document.querySelector(".modal-content")
+    
     if (e.target != modalContent) {
       closeModal();
     }
