@@ -134,6 +134,7 @@ async function openModal(movie) {
 
 function closeModal() {
   const modalBackdrop = document.querySelector(".modal-backdrop");
+  const wrapperMain = document.querySelector(".wrapper-main");
   wrapperMain.removeChild(modalBackdrop);
 }
 
