@@ -1,10 +1,9 @@
 // Функция для получения фильмов из API
 document.addEventListener("DOMContentLoaded", function () {
   const api_key = "7abb31d8-f85d-47c0-97bc-f25c197dd055";
-  const api_url_modal = "https://kinopoiskapiunofficial.tech/api/v2.2/films/";
   const wrapperMain = document.querySelector(".wrapper-main");
   const modalBackdrop = document.createElement("div");
-  const modalContent = document.querySelector(".modal-content")
+  const modalContent = document.querySelector(".modal-content");
   let totalPages = 0;
 
   async function getMovies(page) {
@@ -51,10 +50,10 @@ document.addEventListener("DOMContentLoaded", function () {
           <p class="movieCategory">${
             movie.type.toLowerCase().replace("_", " ").charAt(0).toUpperCase() +
             movie.type.toLowerCase().replace("_", " ").slice(1)}</p>
-          <p class="movieRating">${movie.ratingImdb}/10</p>
+          <p class="movieRating">${movie.ratingImdb}</p>
           </div>
           <h3 class="movieTitle">${movie.nameOriginal}</h3>
-           <button class="playButton">More info</button>`;
+          <button class="playButton">More info</button>`;
 
       movieCard.addEventListener("click", () => {
         openModal(movie);
@@ -66,6 +65,7 @@ document.addEventListener("DOMContentLoaded", function () {
 
 
   async function openModal(movie) {
+    const api_url_modal = "https://kinopoiskapiunofficial.tech/api/v2.2/films/";
     const id = movie.kinopoiskId;
     try{
       const res = await fetch(api_url_modal + id, {
@@ -87,12 +87,12 @@ document.addEventListener("DOMContentLoaded", function () {
         <img class="modal-movie-img"
         src="${resData.posterUrl}" 
         alt="${resData.nameOriginal}" >
-        <h2 class="modal-title">${resData.nameOriginal}</h2>
-        <p class="modal-year">${resData.year}</p>
+        <h2 class="modal-title">${resData.nameOriginal} (${resData.year})</h2>
+        <p class="modal-year">Продолжительность: ${resData.filmLength} мин.</p>
         <p class="modal-genre">Жанр: ${resData.genres.map((el) => el.genre).join(", ")}</p>
         <p class="modal-site">Трейлер можно посмотреть <a class="modal-site-link" href="${resData.webUrl}/video" target="_blank">здесь</a></p>
         <p class="modal-description">${resData.description}</p>
-        <button class="closeButton">x</button>
+        <button class="closeButton">✕</button>
         </div>`
       
       const closeBtn = document.querySelector(".closeButton");
@@ -113,7 +113,9 @@ document.addEventListener("DOMContentLoaded", function () {
   }
 
   function closeModal() {
-    wrapperMain.removeChild(modalBackdrop);
+    if (modalBackdrop && modalBackdrop.parentNode) {
+      modalBackdrop.parentNode.removeChild(modalBackdrop);
+    };
     enableScroll();
   }
 
@@ -158,21 +160,15 @@ document.addEventListener("DOMContentLoaded", function () {
 
     const paginationContainer = document.createElement("div");
     paginationContainer.classList.add("pagination");
-
-    const prevButton = document.createElement("button");
-    prevButton.classList.add("btnPage");
-    prevButton.textContent = "<Previous";
-    prevButton.addEventListener("click", handlePrevPage);
-
-    const nextButton = document.createElement("button");
-    nextButton.classList.add("btnPage");
-    nextButton.textContent = "Next>";
-    nextButton.addEventListener("click", handleNextPage);
-
-    paginationContainer.appendChild(prevButton);
-    paginationContainer.appendChild(nextButton);
-
     wrapperMain.appendChild(paginationContainer);
+
+    paginationContainer.innerHTML = `
+    <button class="btnPage" id="prevButton">Previous</button>
+    <button class="btnPage" id="nextButton">Next</button>`
+  
+    document.getElementById("prevButton").addEventListener("click", handlePrevPage);
+    document.getElementById("nextButton").addEventListener("click", handleNextPage);
+    
   }
   createPagination();
 });

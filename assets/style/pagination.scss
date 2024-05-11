@@ -1,14 +1,45 @@
 @import 'vars';
 .pagination{
+    height: 3rem;
     display: flex;
     flex-direction: row;
     justify-content: space-between;
     align-items: center;
+    margin-top: 2rem;
     .btnPage{
-    @include text-M;
-        padding: 3rem;
+        height: 100%;
+        background-color: #fc4747dc;
+        @include text-M;
+        color: white;
+        margin: 2rem;
+        padding: .8rem;
+        border-radius: 10px;
+        border: .5px solid rgba(255, 255, 255, 0.463);
         &:hover{
-            color: white;
+            transform: scale(1.05);
+            background-color: $red;
+        }
+    }
+}
+
+html.light{
+    .pagination{
+        .btnPage{
+            background-color: #43598f;
+            &:hover{
+                background-color: #213871;
+            }
+        }
+    }
+}
+
+html.third{
+    .pagination{
+        .btnPage{
+            background-color:$semi-dark-blue;
+            &:hover{
+                background-color: #7268cc;
+            }
         }
     }
 }
