@@ -16,6 +16,7 @@
     }
     .titleRecom {
       @include heading-L;
+      color: $title;
       margin-bottom: 30px;
       padding: 10px;
   
@@ -77,6 +78,7 @@
               background-color: rgba(139, 135, 135, 0.6);
               text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.9);
               @include heading-XS;
+              color: $title;
               padding: 10px 20px;
               border: none;
               border-radius: 3rem;
@@ -90,6 +92,7 @@
                 left: 50%;
                 padding-bottom: 2rem;
                 @include text-S;
+                color: $text;
                 color: white;
               }
               &:hover{
@@ -104,6 +107,7 @@
           flex-direction: row;
           justify-content: center;
           @include text-S;
+          color: $text;
   
           .movieYear,
           .movieCategory,
@@ -149,16 +153,21 @@
                 display: none;
               }
             }
+            .movieRating::after {
+              content: "★";
+              margin-left: 3px;
+            }
         }
   
         .movieTitle {
           margin: 15px 0;
           text-align: center;
           @include heading-XS;
+          color: $title;
           @media screen and (max-width: 376px) {
             margin-top: 7px;
             @include text-S;
-            color: $title;
+            color: $text;
           }
           &:hover {
             cursor: pointer;
@@ -182,3 +191,26 @@
       }
     }
 }  
+
+html.light {
+  .wrapper-main{
+    .container-main{
+      .movieCard{
+        .movieCover{
+          &:hover{
+            box-shadow: 0 0 30px rgba(46, 47, 94, 0.801);
+          }
+        }
+        .movieCategory::before {
+          filter: invert(100%);
+        }
+      }
+      .errorMessage{
+        .error-img{
+          filter: invert(80%);
+        }
+      }
+    }
+  }
+}
+

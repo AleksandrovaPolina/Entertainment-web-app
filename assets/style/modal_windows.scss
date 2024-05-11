@@ -47,6 +47,7 @@
 
       .modal-title {
         @include heading-L;
+        color: $title;
         margin: 15px 0;
 
         @media screen and (max-width: 768px) {
@@ -63,6 +64,7 @@
       .modal-genre,
       .modal-site {
         @include text-M;
+        color: $text;
         margin-bottom: 18px;
         overflow-wrap: break-word;
         white-space: pre-wrap;
@@ -77,9 +79,10 @@
       }
       .modal-description {
         @include text-S;
+        color: $text;
       }
       .modal-site-link{
-        color: #fd7774;
+        color: $red;
         font-size: 20px;
         text-decoration: none;
         &:hover{
@@ -96,6 +99,7 @@
         border: none;
         border-radius: 100%;
         background-color: $red;
+        color: white;
         cursor: pointer;
         @include heading-S;
         @media screen and (max-width: 768px) {
@@ -123,3 +127,4 @@
     overflow: hidden;
     height: 100vh;
 };
+
