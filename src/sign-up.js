@@ -14,10 +14,12 @@ function checkInputs(){
         warningInputMessage.classList.remove('none');
         warningPassMessage.classList.add('none');
         warningDifferentPass.classList.add('none');
+        warningError.classList.add('none');
     }else if(passInput.value.trim().length < 6){
         warningInputMessage.classList.add('none');
         warningPassMessage.classList.remove('none');
         warningDifferentPass.classList.add('none');
+        warningError.classList.add('none');
     } else if(passInput.value.trim() !== passSecondInput.value.trim()){
         warningDifferentPass.classList.remove('none');
         warningPassMessage.classList.add('none');
