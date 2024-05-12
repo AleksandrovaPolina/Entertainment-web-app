@@ -27,6 +27,7 @@ async function checkUser(){
 function checkInputs(){
     if(emailInput.value.trim() ==="" || passInput.value.trim() === ""){
         warningInputMessage.classList.remove('none');
+        warningLoginMessage.classList.add('none');
     } else{
         warningInputMessage.classList.add('none');
         checkUser();
