@@ -9,7 +9,6 @@ const warningServer = document.querySelector('.warning_server');
 const btn = document.querySelector('.form__btn');
 
 
-
 function checkInputs(){
     if(emailInput.value.trim() === '' || passInput.value.trim() === '' || passSecondInput.value.trim() === ''){
         warningInputMessage.classList.remove('none');
@@ -23,6 +22,7 @@ function checkInputs(){
         warningDifferentPass.classList.remove('none');
         warningPassMessage.classList.add('none');
         warningInputMessage.classList.add('none');
+        warningError.classList.add('none');
     } else{
         checkUser()
     }
@@ -37,11 +37,17 @@ async function checkUser(){
             signUp()
         } else{
             warningError.classList.remove('none');
+            warningInputMessage.classList.add('none');
+            warningPassMessage.classList.add('none');
+            warningDifferentPass.classList.add('none');
         }
     }catch(error){
         console.error(error);
     }
 }
+
+
+
 
 function signUp(){
     const userData = {
