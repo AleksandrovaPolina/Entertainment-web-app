@@ -6,8 +6,17 @@ document.addEventListener("DOMContentLoaded", function () {
   const modalContent = document.querySelector(".modal-content");
   let totalPages = 0;
 
+  const urlParams = new URLSearchParams(window.location.search);
+  const searchWord = urlParams.get("inputSearch");
+
+  document.getElementById("inputSearch").value = searchWord;
+
   async function getMovies(page, type = "ALL", title = "") {
-    const api_url = `https://kinopoiskapiunofficial.tech/api/v2.2/films?countries=1&genres=1&order=RATING&type=${type}&ratingFrom=0&ratingTo=10&yearFrom=2000&yearTo=2024&page=${page}`;
+    let api_url = `https://kinopoiskapiunofficial.tech/api/v2.2/films?countries=1&genres=1&order=RATING&type=${type}&ratingFrom=0&ratingTo=10&yearFrom=2000&yearTo=2024&page=${page}`;
+
+    if (searchWord) {
+      api_url = api_url + `&keyword=${searchWord}`;
+    }
 
     try {
       const res = await fetch(api_url, {
@@ -37,8 +46,12 @@ document.addEventListener("DOMContentLoaded", function () {
     const containerMain = document.querySelector(".container-main");
     containerMain.innerHTML = "";
 
- 
-  
+    if (data.items.length === 0) {
+      const paragraph = document.createElement("p");
+      paragraph.innerText = "No movies or TV series found";
+      paragraph.classList.add("notFoundText");
+      containerMain.appendChild(paragraph);
+    }
 
     data.items.forEach((movie) => {
       const movieCard = document.createElement("div");
@@ -52,7 +65,8 @@ document.addEventListener("DOMContentLoaded", function () {
           <p class="movieYear">${movie.year}</p>
           <p class="movieCategory">${
             movie.type.toLowerCase().replace("_", " ").charAt(0).toUpperCase() +
-            movie.type.toLowerCase().replace("_", " ").slice(1)}</p>
+            movie.type.toLowerCase().replace("_", " ").slice(1)
+          }</p>
           <p class="movieRating">${movie.ratingImdb}</p>
           </div>
           <h3 class="movieTitle">${movie.nameOriginal}</h3>
@@ -66,11 +80,10 @@ document.addEventListener("DOMContentLoaded", function () {
     });
   }
 
-
   async function openModal(movie) {
     const api_url_modal = "https://kinopoiskapiunofficial.tech/api/v2.2/films/";
     const id = movie.kinopoiskId;
-    try{
+    try {
       const res = await fetch(api_url_modal + id, {
         headers: {
           "X-API-KEY": api_key,
@@ -83,7 +96,7 @@ document.addEventListener("DOMContentLoaded", function () {
       }
 
       const resData = await res.json();
-      modalBackdrop.classList.add('modal-backdrop');
+      modalBackdrop.classList.add("modal-backdrop");
       wrapperMain.appendChild(modalBackdrop);
       modalBackdrop.innerHTML = `
       <div class="modal-content">
@@ -92,19 +105,22 @@ document.addEventListener("DOMContentLoaded", function () {
         alt="${resData.nameOriginal}" >
         <h2 class="modal-title">${resData.nameOriginal} (${resData.year})</h2>
         <p class="modal-year">Продолжительность: ${resData.filmLength} мин.</p>
-        <p class="modal-genre">Жанр: ${resData.genres.map((el) => el.genre).join(", ")}</p>
-        <p class="modal-site">Трейлер можно посмотреть <a class="modal-site-link" href="${resData.webUrl}/video" target="_blank">здесь</a></p>
+        <p class="modal-genre">Жанр: ${resData.genres
+          .map((el) => el.genre)
+          .join(", ")}</p>
+        <p class="modal-site">Трейлер можно посмотреть <a class="modal-site-link" href="${
+          resData.webUrl
+        }/video" target="_blank">здесь</a></p>
         <p class="modal-description">${resData.description}</p>
         <button class="closeButton">✕</button>
-        </div>`
-      
+        </div>`;
+
       const closeBtn = document.querySelector(".closeButton");
       closeBtn.addEventListener("click", () => {
         closeModal();
         enableScroll();
-      });  
-    }
-    catch(error){
+      });
+    } catch (error) {
       const modalError = document.createElement("div");
       modalError.classList.add("modal-error");
       modalError.innerHTML = `
@@ -118,12 +134,11 @@ document.addEventListener("DOMContentLoaded", function () {
   function closeModal() {
     if (modalBackdrop && modalBackdrop.parentNode) {
       modalBackdrop.parentNode.removeChild(modalBackdrop);
-    };
+    }
     enableScroll();
   }
 
   window.addEventListener("click", (e) => {
-    
     if (e.target != modalContent) {
       closeModal();
     }
@@ -134,14 +149,13 @@ document.addEventListener("DOMContentLoaded", function () {
     }
   });
 
-  function disableScroll(){
+  function disableScroll() {
     document.body.classList.add("disable-scroll");
-  };
-  
-  function enableScroll(){
+  }
+
+  function enableScroll() {
     document.body.classList.remove("disable-scroll");
-  };
-  
+  }
 
   ////////////////////////////Пагинация/////////////////////////////////////////////////
 
@@ -159,7 +173,7 @@ document.addEventListener("DOMContentLoaded", function () {
       getMovies(currentPage, type, title);
     }
 
-    getMovies(currentPage);
+    getMovies(currentPage, "ALL", "br");
 
     const paginationContainer = document.createElement("div");
     paginationContainer.classList.add("pagination");
@@ -167,15 +181,18 @@ document.addEventListener("DOMContentLoaded", function () {
 
     paginationContainer.innerHTML = `
     <button class="btnPage" id="prevButton">Previous</button>
-    <button class="btnPage" id="nextButton">Next</button>`
-  
-    document.getElementById("prevButton").addEventListener("click", handlePrevPage);
-    document.getElementById("nextButton").addEventListener("click", handleNextPage);
-    
+    <button class="btnPage" id="nextButton">Next</button>`;
+
+    document
+      .getElementById("prevButton")
+      .addEventListener("click", handlePrevPage);
+    document
+      .getElementById("nextButton")
+      .addEventListener("click", handleNextPage);
   }
   createPagination("ALL", "Recommended for you");
 
-   ////////////////////////////Фильтрация/////////////////////////////////////////////////
+  ////////////////////////////Фильтрация/////////////////////////////////////////////////
 
   const moviesButton = document.getElementById("moviesButton");
   const seriesButton = document.getElementById("seriesButton");
@@ -185,19 +202,19 @@ document.addEventListener("DOMContentLoaded", function () {
   homeButton.addEventListener("click", () => {
     showHomePage();
     changeTitle("Recommended for you");
-  })
+  });
   moviesButton.addEventListener("click", () => {
     getMovies(1, "FILM", "Movies");
     hideTrendingSection();
     changeTitle("Movies");
   });
-  
+
   seriesButton.addEventListener("click", () => {
     getMovies(1, "TV_SERIES", "TV Series");
     hideTrendingSection();
     changeTitle("TV Series");
   });
-  
+
   bookmarkButton.addEventListener("click", () => {
     // закладки
   });
@@ -207,26 +224,17 @@ document.addEventListener("DOMContentLoaded", function () {
     trendingSection.style.display = "none";
   }
 
-  function changeTitle(title){
-    const titleRecomend = document.querySelector('#recommended');
+  function changeTitle(title) {
+    const titleRecomend = document.querySelector("#recommended");
     titleRecomend.innerHTML = title;
   }
 
   function showHomePage() {
     const trendingSection = document.querySelector(".trendingMovies");
     trendingSection.style.display = "block";
-    const titleRecomend = document.querySelector('#recommended');
+    const titleRecomend = document.querySelector("#recommended");
     titleRecomend.style.display = "block";
-    
-  
-    getMovies(1, "ALL", "");
+
+    getMovies(1, "ALL", "br");
   }
-
-
-
-
 });
-
-
-
-
