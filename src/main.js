@@ -37,9 +37,6 @@ document.addEventListener("DOMContentLoaded", function () {
     const containerMain = document.querySelector(".container-main");
     containerMain.innerHTML = "";
 
- 
-  
-
     data.items.forEach((movie) => {
       const movieCard = document.createElement("div");
       movieCard.classList.add("movieCard");
@@ -56,8 +53,8 @@ document.addEventListener("DOMContentLoaded", function () {
           <p class="movieRating">${movie.ratingImdb}</p>
           </div>
           <h3 class="movieTitle">${movie.nameOriginal}</h3>
-          <button class="playButton">More info</button>`;
-
+          <button class="playButton">More info</button>
+          `;
       movieCard.addEventListener("click", () => {
         openModal(movie);
         disableScroll();
@@ -199,8 +196,62 @@ document.addEventListener("DOMContentLoaded", function () {
   });
   
   bookmarkButton.addEventListener("click", () => {
-    // закладки
+    showBookmarks();
   });
+
+  let bookmarks = [];
+
+  function addToBookmarks(movie) {
+    // Проверяем, есть ли фильм уже в закладках
+    if (!bookmarks.some(item => item.kinopoiskId === movie.kinopoiskId)) {
+      bookmarks.push(movie);
+      console.log(`${movie.nameOriginal} added to bookmarks.`);
+    } else {
+      console.log(`${movie.nameOriginal} is already in bookmarks.`);
+    }
+  }
+  
+  // Функция для отображения закладок
+  function showBookmarks() {
+    // Очищаем основной контейнер
+    const containerMain = document.querySelector(".container-main");
+    containerMain.innerHTML = "";
+    hideTrendingSection();
+    changeTitle("Bookmarks");
+  
+  
+    // Если в закладках нет фильмов, выводим сообщение
+    if (bookmarks.length === 0) {
+      containerMain.innerHTML = `<p class ="errorMessage">No bookmarks yet.</p>`;
+      return;
+    }
+  
+    // Отображаем фильмы из закладок
+    bookmarks.forEach(movie => {
+      const movieCard = document.createElement("div");
+      movieCard.classList.add("movieCard");
+      movieCard.setAttribute("id", `${movie.kinopoiskId}`);
+      // Добавляем HTML-разметку для отображения фильма
+      movieCard.innerHTML = `
+      <img src="${movie.posterUrlPreview}" 
+      alt="${movie.nameOriginal}" 
+      class="movieCover">
+      <div class="movieInfo">
+      <p class="movieYear">${movie.year}</p>
+      <p class="movieCategory">${
+        movie.type.toLowerCase().replace("_", " ").charAt(0).toUpperCase() +
+        movie.type.toLowerCase().replace("_", " ").slice(1)}</p>
+      <p class="movieRating">${movie.ratingImdb}</p>
+      </div>
+      <h3 class="movieTitle">${movie.nameOriginal}</h3>
+      <button class="playButton">More info</button>
+      `;
+      containerMain.appendChild(movieCard);
+    });
+
+  }
+  
+
 
   function hideTrendingSection() {
     const trendingSection = document.querySelector(".trendingMovies");
@@ -221,10 +272,6 @@ document.addEventListener("DOMContentLoaded", function () {
   
     getMovies(1, "ALL", "");
   }
-
-
-
-
 });
 
 

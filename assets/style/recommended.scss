@@ -101,6 +101,23 @@
                 opacity: 1;
               }
             }
+
+            .bookmarkButton{
+              top: 45%;
+              left: 50%;
+              transform: translate(-50%, -50%);
+              width: 3rem;
+              height: 3rem;
+              background-color: rgba(139, 135, 135, 0.6);
+              text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.9);
+              @include heading-XS;
+              color: $title;
+              padding: 10px 20px;
+              border: none;
+              border-radius: 3rem;
+              cursor: pointer;
+              text-align: center;
+            }
   
         .movieInfo {
           width: 100%;
