@@ -1,23 +1,35 @@
 @import 'vars';
 .pagination{
-    height: 3rem;
     display: flex;
     flex-direction: row;
-    justify-content: space-between;
+    justify-content: center;
     align-items: center;
-    margin-top: 2rem;
+    margin: 2rem 2rem;
+    @media screen and (max-width: 376px) {
+        height: 2rem;
+        margin-top: 1rem;
+    }
     .btnPage{
-        height: 100%;
+        width: 6rem;
         background-color: #fc4747dc;
         @include text-M;
         color: white;
-        margin: 2rem;
         padding: .8rem;
-        border-radius: 10px;
+        border-radius: 3rem;
         border: .5px solid rgba(255, 255, 255, 0.463);
+        margin: 1rem;
         &:hover{
             transform: scale(1.05);
             background-color: $red;
+        }
+
+        @media screen and (max-width: 768px) {
+            padding: .4rem;
+            font-size: 14px;
+        }
+
+        @media screen and (max-width: 376px) {
+            font-size: 12px;
         }
     }
 }
