@@ -6,8 +6,8 @@ document.addEventListener("DOMContentLoaded", function () {
   const modalContent = document.querySelector(".modal-content");
   let totalPages = 0;
 
-  async function getMovies(page) {
-    const api_url = `https://kinopoiskapiunofficial.tech/api/v2.2/films?countries=1&genres=1&order=RATING&type=ALL&ratingFrom=0&ratingTo=10&yearFrom=2000&yearTo=2024&page=${page}`;
+  async function getMovies(page, type = "ALL", title = "") {
+    const api_url = `https://kinopoiskapiunofficial.tech/api/v2.2/films?countries=1&genres=1&order=RATING&type=${type}&ratingFrom=0&ratingTo=10&yearFrom=2000&yearTo=2024&page=${page}`;
 
     try {
       const res = await fetch(api_url, {
@@ -22,7 +22,7 @@ document.addEventListener("DOMContentLoaded", function () {
       }
       const resData = await res.json();
       totalPages = resData.pagesCount;
-      viewMovies(resData);
+      viewMovies(resData, title);
     } catch (error) {
       document.querySelector(".errorMessage").innerHTML = `
       <img class="error-img" src="./assets/gear.png" alt="Gear">
@@ -33,9 +33,12 @@ document.addEventListener("DOMContentLoaded", function () {
 
   // Функция для отображения фильмов на странице
 
-  function viewMovies(data) {
+  function viewMovies(data, title) {
     const containerMain = document.querySelector(".container-main");
     containerMain.innerHTML = "";
+
+ 
+  
 
     data.items.forEach((movie) => {
       const movieCard = document.createElement("div");
@@ -142,18 +145,18 @@ document.addEventListener("DOMContentLoaded", function () {
 
   ////////////////////////////Пагинация/////////////////////////////////////////////////
 
-  function createPagination() {
+  function createPagination(type = "ALL", title = "") {
     let currentPage = 1;
     function handlePrevPage() {
       if (currentPage > 1) {
         currentPage--;
-        getMovies(currentPage);
+        getMovies(currentPage, type, title);
       }
     }
 
     function handleNextPage() {
       currentPage++;
-      getMovies(currentPage);
+      getMovies(currentPage, type, title);
     }
 
     getMovies(currentPage);
@@ -170,5 +173,60 @@ document.addEventListener("DOMContentLoaded", function () {
     document.getElementById("nextButton").addEventListener("click", handleNextPage);
     
   }
-  createPagination();
+  createPagination("ALL", "Recommended for you");
+
+   ////////////////////////////Фильтрация/////////////////////////////////////////////////
+
+  const moviesButton = document.getElementById("moviesButton");
+  const seriesButton = document.getElementById("seriesButton");
+  const bookmarkButton = document.getElementById("bookmarkButton");
+  const homeButton = document.getElementById("homeButton");
+
+  homeButton.addEventListener("click", () => {
+    showHomePage();
+    changeTitle("Recommended for you");
+  })
+  moviesButton.addEventListener("click", () => {
+    getMovies(1, "FILM", "Movies");
+    hideTrendingSection();
+    changeTitle("Movies");
+  });
+  
+  seriesButton.addEventListener("click", () => {
+    getMovies(1, "TV_SERIES", "TV Series");
+    hideTrendingSection();
+    changeTitle("TV Series");
+  });
+  
+  bookmarkButton.addEventListener("click", () => {
+    // закладки
+  });
+
+  function hideTrendingSection() {
+    const trendingSection = document.querySelector(".trendingMovies");
+    trendingSection.style.display = "none";
+  }
+
+  function changeTitle(title){
+    const titleRecomend = document.querySelector('#recommended');
+    titleRecomend.innerHTML = title;
+  }
+
+  function showHomePage() {
+    const trendingSection = document.querySelector(".trendingMovies");
+    trendingSection.style.display = "block";
+    const titleRecomend = document.querySelector('#recommended');
+    titleRecomend.style.display = "block";
+    
+  
+    getMovies(1, "ALL", "");
+  }
+
+
+
+
 });
+
+
+
+
