@@ -1,11 +1,18 @@
 const emailInput = document.querySelector('#email_input');
 const passInput = document.querySelector('#pass_input');
-const warningInputMessage = document.querySelector('.warning_input');
-const warningLoginMessage = document.querySelector('.warning_login');
+const warningMessage = document.querySelector('.warning');
 const loginBtn = document.querySelector('.form__btn');
 
 
 
+function checkInputs(){
+    if(emailInput.value.trim() ==="" || passInput.value.trim() === ""){
+        warningMessage.textContent = 'Пожалуйста, заполните все поля'
+    } else{
+        warningMessage.textContent = ''
+        checkUser();
+    }
+}
 
 async function checkUser(){
     try{
@@ -13,26 +20,17 @@ async function checkUser(){
         const data = await resp.json();
         const getUsers = data.find(item => item.email === emailInput.value && item.password == passInput.value)
         if(!getUsers){
-            warningLoginMessage.classList.remove('none');
+            warningMessage.textContent = 'Логин или пароль введен неверно'
         } else{
-            warningLoginMessage.classList.add('none');
+            warningMessage.textContent = ''
             window.location.href = './profile-page.html'
-            localStorage.setItem('login', JSON.stringify(emailInput.value))
         }
     }catch(error){
         console.error(error);
     }
 }
 
-function checkInputs(){
-    if(emailInput.value.trim() ==="" || passInput.value.trim() === ""){
-        warningInputMessage.classList.remove('none');
-        warningLoginMessage.classList.add('none');
-    } else{
-        warningInputMessage.classList.add('none');
-        checkUser();
-    }
-}
+
 
 loginBtn.addEventListener('click', function(event){
     event.preventDefault();
