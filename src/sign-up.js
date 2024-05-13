@@ -1,30 +1,21 @@
 const emailInput = document.querySelector('#email-input');
 const passInput = document.querySelector('#pass-input');
 const passSecondInput = document.querySelector('#second-pass-input');
-const warningInputMessage = document.querySelector('.warning_input');
-const warningPassMessage = document.querySelector('.warning_pass');
-const warningDifferentPass = document.querySelector('.warning_difference-pass');
-const warningError = document.querySelector('.warning_error');
-const warningServer = document.querySelector('.warning_server');
+const warningMessage = document.querySelector('.warning');
 const btn = document.querySelector('.form__btn');
+
 
 
 function checkInputs(){
     if(emailInput.value.trim() === '' || passInput.value.trim() === '' || passSecondInput.value.trim() === ''){
-        warningInputMessage.classList.remove('none');
-        warningPassMessage.classList.add('none');
-        warningDifferentPass.classList.add('none');
+        warningMessage.textContent = 'Пожалуйста, заполните все поля';
     }else if(passInput.value.trim().length < 6){
-        warningInputMessage.classList.add('none');
-        warningPassMessage.classList.remove('none');
-        warningDifferentPass.classList.add('none');
+        warningMessage.textContent = 'Пароль должен быть не менее 6 символов';
     } else if(passInput.value.trim() !== passSecondInput.value.trim()){
-        warningDifferentPass.classList.remove('none');
-        warningPassMessage.classList.add('none');
-        warningInputMessage.classList.add('none');
-        warningError.classList.add('none');
+        warningMessage.textContent = 'Пароли не совпадают';
     } else{
         checkUser()
+        warningMessage.textContent = '';
     }
 }
 
@@ -36,17 +27,12 @@ async function checkUser(){
         if(!getUsers){
             signUp()
         } else{
-            warningError.classList.remove('none');
-            warningInputMessage.classList.add('none');
-            warningPassMessage.classList.add('none');
-            warningDifferentPass.classList.add('none');
+            warningMessage.textContent = 'Пользователь с таким email уже зарегистрирован';
         }
     }catch(error){
         console.error(error);
     }
 }
-
-
 
 
 function signUp(){
@@ -65,7 +51,7 @@ function signUp(){
         if(res.ok){
             window.location.href = './profile-page.html'
         } else{
-            warningServer.classList.remove('none');
+            warningMessage.textContent = 'На сервере произошла ошибка, попробуйте еще раз';
         }
     })
     .catch((error)=>{
