@@ -161,6 +161,13 @@ document.addEventListener("DOMContentLoaded", function () {
 
   function createPagination(type = "ALL", title = "") {
     let currentPage = 1;
+
+     // Проверяем, существует ли уже контейнер пагинации
+  const existingPagination = document.querySelector(".pagination");
+  if (existingPagination) {
+    // Если существует, удаляем его
+    existingPagination.remove();
+  }
     function handlePrevPage() {
       if (currentPage > 1) {
         currentPage--;
@@ -173,7 +180,7 @@ document.addEventListener("DOMContentLoaded", function () {
       getMovies(currentPage, type, title);
     }
 
-    getMovies(currentPage, "ALL", "br");
+    getMovies(currentPage,type, title);
 
     const paginationContainer = document.createElement("div");
     paginationContainer.classList.add("pagination");
@@ -190,7 +197,7 @@ document.addEventListener("DOMContentLoaded", function () {
       .getElementById("nextButton")
       .addEventListener("click", handleNextPage);
   }
-  createPagination("ALL", "Recommended for you");
+  createPagination(this.type, this.title );
 
   ////////////////////////////Фильтрация/////////////////////////////////////////////////
 
@@ -202,15 +209,19 @@ document.addEventListener("DOMContentLoaded", function () {
   homeButton.addEventListener("click", () => {
     showHomePage();
     changeTitle("Recommended for you");
+    createPagination("ALL", "Recommended for you");
   });
   moviesButton.addEventListener("click", () => {
     getMovies(1, "FILM", "Movies");
+    createPagination("FILM", "Movies");
     hideTrendingSection();
     changeTitle("Movies");
+
   });
 
   seriesButton.addEventListener("click", () => {
     getMovies(1, "TV_SERIES", "TV Series");
+    createPagination("TV_SERIES", "TV Series");
     hideTrendingSection();
     changeTitle("TV Series");
   });
@@ -289,6 +300,6 @@ document.addEventListener("DOMContentLoaded", function () {
     const titleRecomend = document.querySelector("#recommended");
     titleRecomend.style.display = "block";
 
-    getMovies(1, "ALL", "br");
+   // getMovies(1, "ALL", "br");
   }
 });
