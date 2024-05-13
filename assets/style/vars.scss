@@ -6,6 +6,16 @@ $red: var(--red);
 $title: var(--title);
 $text: var(--text);
 
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  background-color: $dark-blue;
+}
+
 html.dark {
   --greyish: #5a698f;
   --second-color: #161d2f;
@@ -38,7 +48,6 @@ html.third {
   font-family: "Outfit", sans-serif;
   font-weight: 200; // Легкий
   font-size: 32px;
-  color: #ffffff;
 }
 
 // Шаблон для заголовка M
@@ -46,7 +55,6 @@ html.third {
   font-family: "Outfit", sans-serif;
   font-weight: 400; // Обычный
   font-size: 24px;
-  color: #ffffff;
 }
 
 // Шаблон для заголовка S
@@ -54,7 +62,6 @@ html.third {
   font-family: "Outfit", sans-serif;
   font-weight: 400; // Обычный
   font-size: 24px;
-  color: #ffffffed;
 }
 
 // Шаблон для заголовка XS
@@ -62,33 +69,29 @@ html.third {
   font-family: "Outfit", sans-serif;
   font-weight: 300; // Легкий
   font-size: 18px;
-  color: #ffffff;
 }
 
 @mixin text-M {
   font-family: "Outfit", sans-serif;
   font-weight: 300; // Легкий
   font-size: 18px;
-  color: #ffffff95;
 }
 
 @mixin text-S {
   font-family: "Outfit", sans-serif;
   font-weight: 300; // Легкий
   font-size: 15px;
-  color: #ffffff95;
 }
 
 @mixin text-login {
   font-family: "Outfit", sans-serif;
   font-weight: 300; // Легкий
-  font-size: 13px;
-  color: white;
+  font-size: 15px;
 }
 
 @mixin text-sign-up {
   font-family: "Outfit", sans-serif;
   font-weight: 300; // Легкий
   font-size: 15px;
-  color: $red;
+  color: #fc4747;
 }

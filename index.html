@@ -5,8 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <link rel="shortcut icon" href="./assets/clapperboard.png" />
     <link rel="stylesheet" href="./assets/style/GlobalStyle/normalize.css" />
-    <link rel="stylesheet" href="./main.scss" />
-    <link rel="stylesheet" href="./side-nav.scss" />
+    <link rel="stylesheet" href="./assets/style/main.scss"/>
     <title>Entertainment web app</title>
   </head>
   <body>
@@ -52,7 +51,7 @@
             </div>
           </div>
           <div class="nav__bg nav__navigation">
-            <button>
+            <button id="homeButton">
               <img
                 class="nav__bg nav__icon nav__icon-home"
                 src="./assets/icon-nav-home.svg"
@@ -61,7 +60,7 @@
               />
             </button>
 
-            <button>
+            <button id="moviesButton">
               <img
                 class="nav__bg nav__icon nav__icon-movie"
                 src="./assets/icon-nav-movies.svg"
@@ -70,7 +69,7 @@
               />
             </button>
 
-            <button>
+            <button id="seriesButton">
               <img
                 class="nav__bg nav__icon nav__icon-series"
                 src="./assets/icon-nav-tv-series.svg"
@@ -79,7 +78,7 @@
               />
             </button>
 
-            <button>
+            <button id="bookmarkButton">
               <img
                 class="nav__bg nav__icon nav__icon-bookmark"
                 src="./assets/icon-nav-bookmark.svg"
@@ -111,22 +110,25 @@
             placeholder="Search for movies or TV series"
           />
         </form>
+        
         <div class="trendingMovies">
           <h2 class="trendingTitle">Trending</h2>
+          
           <div class="trendingMoviesContainer"></div>
           <div id="error"></div>
-          <div id="finallyResult"></div>
+      <div class="modal"></div>
         </div>
         <!-- Display recommended shows -->
-        <h2 class="titleRecom">Recommended for you</h2>
+        <h2 id="recommended" class="titleRecom">Recommended for you</h2>
         <div class="container-main">
+          <div class="modal"></div>
           <div class="errorMessage"></div>
         </div>
     </div>
 
-    <script src="main.js"></script>
+    <script src="/src/main.js"></script>
     <script src="side-nav.js"></script>
-    <script src="trending.js"></script>
+    <script src="/src/trending.js"></script>
     <script src="color-theme.js"></script>
   </body>
 </html>

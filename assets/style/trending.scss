@@ -1,5 +1,8 @@
+@import "vars";
+
 .trendingTitle {
   @include heading-L;
+  color: #ffffff;
   margin-bottom: 10px;
   padding: 10px;
   @media screen and (max-width: 376px) {
@@ -12,11 +15,9 @@
 
 .trendingMovies {
   width: 100%;
-  max-width: 1240px;
   margin: 0 auto;
   margin-top: 20px;
   margin-bottom: 30px;
-  gap: 20px;
   @media screen and (max-width: 376px) {
     margin-bottom: 10px;
     margin-top: 10px;
@@ -26,6 +27,7 @@
     margin-top: 10px;
   }
   .trendingMoviesContainer {
+    max-width: 1440px;
     display: grid;
     grid-template-columns: repeat(20, 1fr);
     overflow-x: hidden;
@@ -33,6 +35,7 @@
     white-space: nowrap;
     scroll-behavior: auto;
     height: auto;
+    gap: 5px;
 
     .movieCardNew {
       width: 100%;
@@ -52,11 +55,9 @@
       @media screen and (max-width: 768px) {
         width: 200px;
       }
-
       .playButton {
         display: none;
         position: absolute;
-        background-image: url("./assets/icon-play.svg");
         background-position: 0.7rem center;
         background-repeat: no-repeat;
         width: 7rem;
@@ -64,14 +65,17 @@
         top: 40%;
         left: 50%;
         transform: translate(-50%, -50%);
-        background-color: rgba(255, 255, 255, 0.314);
+        background-color: rgba(139, 135, 135, 0.6);
+        text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.9);
         @include heading-XS;
+        color: #ffffff;
         padding: 10px 20px;
         border: none;
         border-radius: 3rem;
         cursor: pointer;
         text-align: end;
       }
+
       .movieInfoNew {
         text-align: center;
         padding-top: 10px;
@@ -150,8 +154,62 @@
         height: 200px;
       }
       @media screen and (max-width: 768px) {
-        height: 300px;
+        height: 280px;
       }
     }
+  }
+
+  .modal {
+    display: none;
+    position: fixed;
+    z-index: 100;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    overflow: auto;
+    background-color: rgba (0, 0, 0, 0.5);
+  }
+  .modal--show {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+
+  .modal__card {
+    max-width: 600px;
+    padding: 16px;
+    display: flex;
+    flex-direction: column;
+    background-color: #ffffff;
+  }
+
+  .modal__movie-backdrop {
+    width: 100%;
+    margin-bottom: 10px;
+    margin: 0 auto;
+  }
+
+  .modal__movie-info {
+    margin-left: 20px;
+  }
+
+  .modal__button-close {
+    padding: 5px;
+    margin: 10px;
+    align-self: center;
+  }
+
+  .modal__movie-site {
+    color: #ffd80e;
+  }
+
+  ul li {
+    padding: 5px;
+  }
+
+  .stop-scrolling {
+    height: 100%;
+    overflow: hidden;
   }
 }
