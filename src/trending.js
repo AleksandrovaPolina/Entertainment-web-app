@@ -42,7 +42,7 @@ function createTrendingMoviesSection(data) {
       movie.nameOriginal ? movie.nameOriginal : movie.nameRu
     }</p>`;
 
-    // modal
+    // modal;
     // const playButton = document.createElement("button");
     // playButton.classList.add("playButton");
     // playButton.textContent = "More info";
@@ -54,8 +54,10 @@ function createTrendingMoviesSection(data) {
     // movieCard.addEventListener("mouseleave", () => {
     //   playButton.style.display = "none";
     // });
-    // modal
-
+    // modal;
+    movieCard.addEventListener("click", () =>
+      openModalTrending(movie.kinopoiskId)
+    );
     movieCard.appendChild(movieImg);
     movieCard.appendChild(infoElement);
     trendingMoviesContainer.appendChild(movieCard);
@@ -64,6 +66,64 @@ function createTrendingMoviesSection(data) {
 }
 
 // modal
+modalEl = document.querySelector(".modal");
+
+async function openModalTrending(kinopoiskId) {
+  const api_url_modal = "https://kinopoiskapiunofficial.tech/api/v2.2/films/";
+  const id = kinopoiskId;
+
+  const resp = await fetch(api_url_modal + id, {
+    headers: {
+      "X-API-KEY": "475b780a-eb7a-4f03-ab2c-288319493865",
+      "Content-Type": "application/json",
+    },
+  });
+
+  const respData = await resp.json();
+  modalEl.classList.add("modal--show");
+
+  modalEl.innerHTML = `
+  <div class = "modal__card">
+  <img class="modal__movie-backdrop" src="${respData.posterUrl}"  alt="${
+    respData.nameOriginal
+  }">
+  <h2>
+  <span class="modal__movie-title">Название - ${respData.nameOriginal} </span>
+  <span class="modal__movie-releaese-year">Год - ${respData.year} </span>
+  </h2>
+  <ul class="modal__movie-info">
+  <div class="loader"></div>
+  <li class="modal__movie-genre">Жанр - ${respData.genres.map(
+    (el) => `<p>${el.genre}</p>`
+  )}</li>
+  <li class="modal__movie-runtime">Время - ${respData.filmLength} минут</li>
+  <li> Сайт: <a class="modal__movie-site" href="${respData.webUrl}">${
+    respData.webUrl
+  }</a></li>
+  <li class="modal__movie-overview">Описaние - ${respData.description}</li>
+  </ul>
+  <button type="button" class="modal__button-close">Закрыть</button>
+  </div>`;
+
+  const btnClose = document.querySelector(".modal__button-close");
+  btnClose.addEventListener("click", () => closeModalTrending());
+}
+
+function closeModalTrending() {
+  modalEl.classList.remove("modal--show");
+}
+
+window.addEventListener("click", (evt) => {
+  if (evt.target === modalEl) {
+    closeModalTrending();
+  }
+});
+
+window.addEventListener("keydown", (evt) => {
+  if (evt.keyCode === 27) {
+    modalEl.classList.remove("modal--show");
+  }
+});
 
 // modal
 
