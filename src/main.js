@@ -70,11 +70,37 @@ document.addEventListener("DOMContentLoaded", function () {
           <p class="movieRating">${movie.ratingImdb}</p>
           </div>
           <h3 class="movieTitle">${movie.nameOriginal}</h3>
-          <button class="playButton">More info</button>`;
-
+          <button class="playButton">More info</button>
+          <button class="bookmarkButton" id="addFavorite">
+          <img src="${movie.bookmarked ? 
+            './assets/icon-bookmark-full.svg' : 
+            './assets/icon-bookmark-empty.svg'}" alt="Bookmark">
+          </button>
+          `;
       movieCard.addEventListener("click", () => {
         openModal(movie);
         disableScroll();
+      });
+      movieCard.addEventListener("click", (event) => {
+        if (event.target.classList.contains("bookmarkButton")) {
+          event.stopPropagation();
+          const bookmarkButton = event.target;
+          const movieId = movieCard.getAttribute("id");
+          const movieData = data.items.find((item) => item.kinopoiskId === parseInt(movieId));
+    
+          if (bookmarkButton.classList.contains("active")) {
+            removeFromBookmarks(movieData);
+            bookmarkButton.classList.remove("active");
+            bookmarkButton.innerHTML = '<img src="./assets/icon-bookmark-empty.svg" alt="Bookmark">';
+          } else {
+            saveToBookmarks(movieData);
+            bookmarkButton.classList.add("active");
+            bookmarkButton.innerHTML = '<img src="./assets/icon-bookmark-full.svg" alt="Bookmark">';
+          }
+        } else {
+          openModal(movie);
+          disableScroll();
+        }
       });
       containerMain.appendChild(movieCard);
     });
@@ -161,6 +187,13 @@ document.addEventListener("DOMContentLoaded", function () {
 
   function createPagination(type = "ALL", title = "") {
     let currentPage = 1;
+
+     // Проверяем, существует ли уже контейнер пагинации
+  const existingPagination = document.querySelector(".pagination");
+  if (existingPagination) {
+    // Если существует, удаляем его
+    existingPagination.remove();
+  }
     function handlePrevPage() {
       if (currentPage > 1) {
         currentPage--;
@@ -173,7 +206,7 @@ document.addEventListener("DOMContentLoaded", function () {
       getMovies(currentPage, type, title);
     }
 
-    getMovies(currentPage, "ALL", "br");
+    getMovies(currentPage,type, title);
 
     const paginationContainer = document.createElement("div");
     paginationContainer.classList.add("pagination");
@@ -190,7 +223,7 @@ document.addEventListener("DOMContentLoaded", function () {
       .getElementById("nextButton")
       .addEventListener("click", handleNextPage);
   }
-  createPagination("ALL", "Recommended for you");
+  createPagination(this.type, this.title );
 
   ////////////////////////////Фильтрация/////////////////////////////////////////////////
 
@@ -202,22 +235,55 @@ document.addEventListener("DOMContentLoaded", function () {
   homeButton.addEventListener("click", () => {
     showHomePage();
     changeTitle("Recommended for you");
+    createPagination("ALL", "Recommended for you");
   });
   moviesButton.addEventListener("click", () => {
     getMovies(1, "FILM", "Movies");
+    createPagination("FILM", "Movies");
     hideTrendingSection();
     changeTitle("Movies");
+
   });
 
   seriesButton.addEventListener("click", () => {
     getMovies(1, "TV_SERIES", "TV Series");
+    createPagination("TV_SERIES", "TV Series");
     hideTrendingSection();
     changeTitle("TV Series");
   });
 
+  ///////////////////////Bookmarks////////////////////////////////////////
+
   bookmarkButton.addEventListener("click", () => {
-    // закладки
+    showBookmarks();
   });
+
+  function saveToBookmarks(movie) {
+    let bookmarks = JSON.parse(localStorage.getItem("bookmarks")) || [];
+    const existingBookmark = bookmarks.find((bookmark) => bookmark.kinopoiskId === movie.kinopoiskId);
+  
+    if (!existingBookmark) {
+      bookmarks.push(movie);
+      localStorage.setItem("bookmarks", JSON.stringify(bookmarks));
+    }
+  }
+
+  function removeFromBookmarks(movie) {
+    let bookmarks = JSON.parse(localStorage.getItem("bookmarks")) || [];
+    bookmarks = bookmarks.filter((bookmark) => bookmark.kinopoiskId !== movie.kinopoiskId);
+    localStorage.setItem("bookmarks", JSON.stringify(bookmarks));
+  }
+
+  function showBookmarks() {
+    const bookmarks = JSON.parse(localStorage.getItem("bookmarks")) || [];
+    const data = { items: bookmarks };
+    viewMovies(data, "Bookmarks");
+    createPagination("ALL", "Bookmarks");
+    hideTrendingSection();
+    changeTitle("Bookmarks");
+  }
+
+
 
   function hideTrendingSection() {
     const trendingSection = document.querySelector(".trendingMovies");
@@ -235,6 +301,6 @@ document.addEventListener("DOMContentLoaded", function () {
     const titleRecomend = document.querySelector("#recommended");
     titleRecomend.style.display = "block";
 
-    getMovies(1, "ALL", "br");
+  
   }
 });
