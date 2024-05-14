@@ -49,6 +49,8 @@ function signUp(){
     })
     .then((res)=>{
         if(res.ok){
+            warningMessage.textContent = ''
+            window.localStorage.setItem('user', emailInput.value);
             window.location.href = './profile-page.html'
         } else{
             warningMessage.textContent = 'На сервере произошла ошибка, попробуйте еще раз';

@@ -23,7 +23,8 @@ async function checkUser(){
             warningMessage.textContent = 'Логин или пароль введен неверно'
         } else{
             warningMessage.textContent = ''
-            window.location.href = './profile-page.html'
+            window.localStorage.setItem('user', emailInput.value);
+            window.location.href = './profile-page.html';
         }
     }catch(error){
         console.error(error);
