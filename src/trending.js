@@ -12,14 +12,14 @@ async function getTrending(url) {
       },
     });
     const respData = await resp.json();
-    createTrendingMoviesSection(respData);
+    createTrending(respData);
   } catch (error) {
     document.getElementById("error").textContent =
       "Error trending movies: " + error;
   }
 }
 
-function createTrendingMoviesSection(data) {
+function createTrending(data) {
   const trendingMoviesContainer = document.querySelector(
     ".trendingMoviesContainer"
   );
@@ -42,67 +42,75 @@ function createTrendingMoviesSection(data) {
       movie.nameOriginal ? movie.nameOriginal : movie.nameRu
     }</p>`;
 
-    // modal;
-    // const playButton = document.createElement("button");
-    // playButton.classList.add("playButton");
-    // playButton.textContent = "More info";
+    const playButton = document.createElement("button");
+    playButton.classList.add("playButton");
+    playButton.textContent = "More info";
 
-    // movieCard.addEventListener("mouseenter", () => {
-    //   playButton.style.display = "block";
-    // });
+    movieCard.addEventListener("mouseenter", () => {
+      playButton.style.display = "block";
+    });
 
-    // movieCard.addEventListener("mouseleave", () => {
-    //   playButton.style.display = "none";
-    // });
-    // modal;
-    movieCard.addEventListener("click", () =>
-      openModalTrending(movie.kinopoiskId)
-    );
+    movieCard.addEventListener("mouseleave", () => {
+      playButton.style.display = "none";
+    });
+
     movieCard.appendChild(movieImg);
     movieCard.appendChild(infoElement);
     trendingMoviesContainer.appendChild(movieCard);
-    // movieCard.appendChild(playButton);
+
+    movieCard.appendChild(playButton);
+    playButton.addEventListener("click", () =>
+      openModalTrending(movie.kinopoiskId)
+    );
   });
 }
 
-// modal
+////////////////////////////Modal////////////////////////////////////
+
 modalEl = document.querySelector(".modal");
 
 async function openModalTrending(kinopoiskId) {
-  const api_url_modal = "https://kinopoiskapiunofficial.tech/api/v2.2/films/";
-  const id = kinopoiskId;
-
-  const resp = await fetch(api_url_modal + id, {
-    headers: {
-      "X-API-KEY": "475b780a-eb7a-4f03-ab2c-288319493865",
-      "Content-Type": "application/json",
-    },
-  });
+  const resp = await fetch(
+    "https://kinopoiskapiunofficial.tech/api/v2.2/films/" + kinopoiskId,
+    {
+      headers: {
+        "X-API-KEY": "475b780a-eb7a-4f03-ab2c-288319493865",
+        "Content-Type": "application/json",
+      },
+    }
+  );
 
   const respData = await resp.json();
+
   modalEl.classList.add("modal--show");
+  document.body.classList.add("stop-scrolling");
 
   modalEl.innerHTML = `
   <div class = "modal__card">
-  <img class="modal__movie-backdrop" src="${respData.posterUrl}"  alt="${
-    respData.nameOriginal
+  <img class="modal__movie-img" src="${respData.posterUrl}"  alt="${
+    respData.nameOriginal ? respData.nameOriginal : respData.nameRu
   }">
-  <h2>
-  <span class="modal__movie-title">Название - ${respData.nameOriginal} </span>
-  <span class="modal__movie-releaese-year">Год - ${respData.year} </span>
+  <h2 class="modal__movie-title">
+  ${respData.nameOriginal ? respData.nameOriginal : respData.nameRu} (${
+    respData.year ? respData.year : ""
+  })
   </h2>
-  <ul class="modal__movie-info">
+  <div class="modal__movie-info">
   <div class="loader"></div>
-  <li class="modal__movie-genre">Жанр - ${respData.genres.map(
-    (el) => `<p>${el.genre}</p>`
-  )}</li>
-  <li class="modal__movie-runtime">Время - ${respData.filmLength} минут</li>
-  <li> Сайт: <a class="modal__movie-site" href="${respData.webUrl}">${
+  ${
+    respData.filmLength
+      ? `<p class="modal__movie-runtime">Продолжительность: ${respData.filmLength} мин.</p>`
+      : ""
+  }
+  <p class="modal__movie-genre">Жанр - ${respData.genres
+    .map((el) => el.genre)
+    .join(", ")}</p>
+  <p class="modal__movie-site">Трейлер можно посмотреть <a class="modal-site-link" href="${
     respData.webUrl
-  }</a></li>
-  <li class="modal__movie-overview">Описaние - ${respData.description}</li>
-  </ul>
-  <button type="button" class="modal__button-close">Закрыть</button>
+  }/video" target="_blank">здесь</a></p>
+  <p class="modal__movie-overview">${respData.description}</p>
+  </div>
+  <button type="button" class="modal__button-close">✕</button>
   </div>`;
 
   const btnClose = document.querySelector(".modal__button-close");
@@ -111,6 +119,7 @@ async function openModalTrending(kinopoiskId) {
 
 function closeModalTrending() {
   modalEl.classList.remove("modal--show");
+  document.body.classList.remove("stop-scrolling");
 }
 
 window.addEventListener("click", (evt) => {
@@ -121,21 +130,13 @@ window.addEventListener("click", (evt) => {
 
 window.addEventListener("keydown", (evt) => {
   if (evt.keyCode === 27) {
-    modalEl.classList.remove("modal--show");
+    closeModalTrending();
   }
 });
 
-// modal
+////////////////////////////Modal////////////////////////////////////
 
-// Horizontal scroll
-
-function disableScroll() {
-  document.body.classList.add("disable-scroll");
-}
-
-function enableScroll() {
-  document.body.classList.remove("disable-scroll");
-}
+////////////////////////////Horizontal scroll////////////////////////////////////
 
 const container = document.querySelector(".trendingMoviesContainer");
 let isDown = false;
@@ -163,3 +164,5 @@ container.addEventListener("mousemove", (e) => {
   const walk = (x - startX) * 3;
   container.scrollLeft = scrollLeft - walk;
 });
+
+////////////////////////////Horizontal scroll////////////////////////////////////
