@@ -71,13 +71,36 @@ document.addEventListener("DOMContentLoaded", function () {
           </div>
           <h3 class="movieTitle">${movie.nameOriginal}</h3>
           <button class="playButton">More info</button>
-          <button class="bookmarkButton favorite" id="addFavorite">
-          ${movie.bookmarked ? '<svg width="12" height="14" xmlns="http://www.w3.org/2000/svg"><path d="M10.61 0c.14 0 .273.028.4.083a1.03 1.03 0 0 1 .657.953v11.928a1.03 1.03 0 0 1-.656.953c-.116.05-.25.074-.402.074-.291 0-.543-.099-.756-.296L5.833 9.77l-4.02 3.924c-.218.203-.47.305-.756.305a.995.995 0 0 1-.4-.083A1.03 1.03 0 0 1 0 12.964V1.036A1.03 1.03 0 0 1 .656.083.995.995 0 0 1 1.057 0h9.552Z" fill="#FFF"/></svg>' : '<svg width="12" height="14" xmlns="http://www.w3.org/2000/svg"><path d="m10.518.75.399 12.214-5.084-4.24-4.535 4.426L.75 1.036l9.768-.285Z" stroke="#FFF" stroke-width="1.5" fill="none"/></svg>'}
-        </button>
+          <button class="bookmarkButton" id="addFavorite">
+          <img src="${movie.bookmarked ? 
+            './assets/icon-bookmark-full.svg' : 
+            './assets/icon-bookmark-empty.svg'}" alt="Bookmark">
+          </button>
           `;
       movieCard.addEventListener("click", () => {
         openModal(movie);
         disableScroll();
+      });
+      movieCard.addEventListener("click", (event) => {
+        if (event.target.classList.contains("bookmarkButton")) {
+          event.stopPropagation();
+          const bookmarkButton = event.target;
+          const movieId = movieCard.getAttribute("id");
+          const movieData = data.items.find((item) => item.kinopoiskId === parseInt(movieId));
+    
+          if (bookmarkButton.classList.contains("active")) {
+            removeFromBookmarks(movieData);
+            bookmarkButton.classList.remove("active");
+            bookmarkButton.innerHTML = '<img src="./assets/icon-bookmark-empty.svg" alt="Bookmark">';
+          } else {
+            saveToBookmarks(movieData);
+            bookmarkButton.classList.add("active");
+            bookmarkButton.innerHTML = '<img src="./assets/icon-bookmark-full.svg" alt="Bookmark">';
+          }
+        } else {
+          openModal(movie);
+          disableScroll();
+        }
       });
       containerMain.appendChild(movieCard);
     });
@@ -229,62 +252,37 @@ document.addEventListener("DOMContentLoaded", function () {
     changeTitle("TV Series");
   });
 
+  ///////////////////////Bookmarks////////////////////////////////////////
+
   bookmarkButton.addEventListener("click", () => {
     showBookmarks();
   });
 
-  let bookmarks = [];
-
-  function addToBookmarks(movie) {
-    // Проверяем, есть ли фильм уже в закладках
-    if (!bookmarks.some(item => item.kinopoiskId === movie.kinopoiskId)) {
+  function saveToBookmarks(movie) {
+    let bookmarks = JSON.parse(localStorage.getItem("bookmarks")) || [];
+    const existingBookmark = bookmarks.find((bookmark) => bookmark.kinopoiskId === movie.kinopoiskId);
+  
+    if (!existingBookmark) {
       bookmarks.push(movie);
-      console.log(`${movie.nameOriginal} added to bookmarks.`);
-    } else {
-      console.log(`${movie.nameOriginal} is already in bookmarks.`);
+      localStorage.setItem("bookmarks", JSON.stringify(bookmarks));
     }
   }
-  
-  // Функция для отображения закладок
+
+  function removeFromBookmarks(movie) {
+    let bookmarks = JSON.parse(localStorage.getItem("bookmarks")) || [];
+    bookmarks = bookmarks.filter((bookmark) => bookmark.kinopoiskId !== movie.kinopoiskId);
+    localStorage.setItem("bookmarks", JSON.stringify(bookmarks));
+  }
+
   function showBookmarks() {
-    // Очищаем основной контейнер
-    const containerMain = document.querySelector(".container-main");
-    containerMain.innerHTML = "";
+    const bookmarks = JSON.parse(localStorage.getItem("bookmarks")) || [];
+    const data = { items: bookmarks };
+    viewMovies(data, "Bookmarks");
+    createPagination("ALL", "Bookmarks");
     hideTrendingSection();
     changeTitle("Bookmarks");
-  
-  
-    // Если в закладках нет фильмов, выводим сообщение
-    if (bookmarks.length === 0) {
-      containerMain.innerHTML = `<p class ="errorMessage">No bookmarks yet.</p>`;
-      return;
-    }
-  
-    // Отображаем фильмы из закладок
-    bookmarks.forEach(movie => {
-      const movieCard = document.createElement("div");
-      movieCard.classList.add("movieCard");
-      movieCard.setAttribute("id", `${movie.kinopoiskId}`);
-      // Добавляем HTML-разметку для отображения фильма
-      movieCard.innerHTML = `
-      <img src="${movie.posterUrlPreview}" 
-      alt="${movie.nameOriginal}" 
-      class="movieCover">
-      <div class="movieInfo">
-      <p class="movieYear">${movie.year}</p>
-      <p class="movieCategory">${
-        movie.type.toLowerCase().replace("_", " ").charAt(0).toUpperCase() +
-        movie.type.toLowerCase().replace("_", " ").slice(1)}</p>
-      <p class="movieRating">${movie.ratingImdb}</p>
-      </div>
-      <h3 class="movieTitle">${movie.nameOriginal}</h3>
-      <button class="playButton">More info</button>
-      `;
-      containerMain.appendChild(movieCard);
-    });
-
   }
-  
+
 
 
   function hideTrendingSection() {
@@ -303,6 +301,6 @@ document.addEventListener("DOMContentLoaded", function () {
     const titleRecomend = document.querySelector("#recommended");
     titleRecomend.style.display = "block";
 
-   // getMovies(1, "ALL", "br");
+  
   }
 });
