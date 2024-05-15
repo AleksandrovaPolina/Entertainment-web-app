@@ -11,11 +11,14 @@ async function getTrending(url) {
         "X-API-KEY": "475b780a-eb7a-4f03-ab2c-288319493865",
       },
     });
+    if (!resp.ok) {
+      throw new Error("Failed to fetch data");
+    }
     const respData = await resp.json();
     createTrending(respData);
   } catch (error) {
-    document.getElementById("error").textContent =
-      "Error trending movies: " + error;
+    document.querySelector(".error").textContent =
+      error + ".😞Please try later.";
   }
 }
 
@@ -70,33 +73,37 @@ function createTrending(data) {
 modalEl = document.querySelector(".modal");
 
 async function openModalTrending(kinopoiskId) {
-  const resp = await fetch(
-    "https://kinopoiskapiunofficial.tech/api/v2.2/films/" + kinopoiskId,
-    {
-      headers: {
-        "X-API-KEY": "475b780a-eb7a-4f03-ab2c-288319493865",
-        "Content-Type": "application/json",
-      },
+  try {
+    const resp = await fetch(
+      "https://kinopoiskapiunofficial.tech/api/v2.2/films/" + kinopoiskId,
+      {
+        headers: {
+          "X-API-KEY": "475b780a-eb7a-4f03-ab2c-288319493865",
+          "Content-Type": "application/json",
+        },
+      }
+    );
+
+    if (!resp.ok) {
+      throw new Error("Failed to fetch data");
     }
-  );
 
-  const respData = await resp.json();
+    const respData = await resp.json();
 
-  modalEl.classList.add("modal--show");
-  document.body.classList.add("stop-scrolling");
+    modalEl.classList.add("modal--show");
+    document.body.classList.add("stop-scrolling");
 
-  modalEl.innerHTML = `
+    modalEl.innerHTML = `
   <div class = "modal__card">
   <img class="modal__movie-img" src="${respData.posterUrl}"  alt="${
-    respData.nameOriginal ? respData.nameOriginal : respData.nameRu
-  }">
+      respData.nameOriginal ? respData.nameOriginal : respData.nameRu
+    }">
   <h2 class="modal__movie-title">
   ${respData.nameOriginal ? respData.nameOriginal : respData.nameRu} (${
-    respData.year ? respData.year : ""
-  })
+      respData.year ? respData.year : ""
+    })
   </h2>
   <div class="modal__movie-info">
-  <div class="loader"></div>
   ${
     respData.filmLength
       ? `<p class="modal__movie-runtime">Продолжительность: ${respData.filmLength} мин.</p>`
@@ -113,8 +120,12 @@ async function openModalTrending(kinopoiskId) {
   <button type="button" class="modal__button-close">✕</button>
   </div>`;
 
-  const btnClose = document.querySelector(".modal__button-close");
-  btnClose.addEventListener("click", () => closeModalTrending());
+    const btnClose = document.querySelector(".modal__button-close");
+    btnClose.addEventListener("click", () => closeModalTrending());
+  } catch (error) {
+    document.querySelector(".error").textContent =
+      error + ".😞Please try later.";
+  }
 }
 
 function closeModalTrending() {
