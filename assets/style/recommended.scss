@@ -61,12 +61,16 @@
           .movieCover {
             position: relative;
             width: 100%;
-            height: auto;
+            height: 70%;
             border-radius: 10px;
             position: relative;
             &:hover {
               box-shadow: 0 0 20px rgba(143, 143, 143, 0.5);
             }
+            @media screen and (max-width: 376px) {
+              height: 58%;
+            }
+            
           }
             
             .playButton {

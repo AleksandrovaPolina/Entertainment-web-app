@@ -130,14 +130,14 @@ document.addEventListener("DOMContentLoaded", function () {
         src="${resData.posterUrl}" 
         alt="${resData.nameOriginal}" >
         <h2 class="modal-title">${resData.nameOriginal} (${resData.year})</h2>
-        <p class="modal-year">Продолжительность: ${resData.filmLength} мин.</p>
+        ${resData.filmLength ? `<p class="modal-year">Продолжительность: ${resData.filmLength} мин.</p>` : ""}
         <p class="modal-genre">Жанр: ${resData.genres
           .map((el) => el.genre)
           .join(", ")}</p>
         <p class="modal-site">Трейлер можно посмотреть <a class="modal-site-link" href="${
           resData.webUrl
         }/video" target="_blank">здесь</a></p>
-        <p class="modal-description">${resData.description}</p>
+        ${resData.description ? `<p class="modal-description">${resData.description}</p>` : ""}
         <button class="closeButton">✕</button>
         </div>`;
 
@@ -165,7 +165,7 @@ document.addEventListener("DOMContentLoaded", function () {
   }
 
   window.addEventListener("click", (e) => {
-    if (e.target != modalContent) {
+    if (e.target === modalBackdrop) {
       closeModal();
     }
   });
