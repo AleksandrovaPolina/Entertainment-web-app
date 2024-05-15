@@ -62,7 +62,7 @@
         background-repeat: no-repeat;
         width: 7rem;
         height: 3rem;
-        top: 40%;
+        top: 45%;
         left: 50%;
         transform: translate(-50%, -50%);
         background-color: rgba(139, 135, 135, 0.6);
@@ -158,4 +158,11 @@
       }
     }
   }
+}
+
+.error {
+  color: rgb(12, 182, 12);
+  text-shadow: 0 2px 6px rgba(0, 0, 0, 0.2);
+  text-align: center;
+  @include text-M;
 }
