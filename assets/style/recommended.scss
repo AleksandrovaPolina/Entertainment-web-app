@@ -241,3 +241,16 @@ html.light {
   }
 }
 
+.clearAllButton {
+  background-color: #ff0000;
+  color: #fff;
+  padding: 20px 16px;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  margin-top: 20px;
+}
+
+.clearAllButton:hover {
+  background-color: #cc0000;
+}
