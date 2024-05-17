@@ -9,11 +9,9 @@ This project allows users to select a movie or TV series according to their pref
 
 2. Open a tilted folder
 
-3. Enter the command ```npm install -D sass```
+3. Enter the command ```npm install```
 
-4. Enter the command ```npm install```
-
-5. Enter the command ```npm run start```
+4. Enter the command ```npm run start```
 
 
 
@@ -21,17 +19,5 @@ This project allows users to select a movie or TV series according to their pref
 * HTML
 * SCSS
 * Javascript
-
-***
-### Team & responsibilities(function)
-* [AleksandrovaPolina](https://github.com/AleksandrovaPolina) - create login and sign up page
-* [FayaAkh](https://github.com/FayaAkh) - create filter and categories, create local server
-* [grecha97](https://github.com/grecha97) - create main page
-* [NadinKonst](https://github.com/NadinKonst) - create trendings
-* [anna-kandyba](https://github.com/anna-kandyba) - create search
-* [VitOu666](https://github.com/VitOu666) - create user page
-* [lenaozdemir](https://github.com/lenaozdemir) - create navbar
-
-
 
 
