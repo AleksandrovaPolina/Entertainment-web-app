@@ -68,9 +68,7 @@ function createTrending(data) {
   });
 }
 
-////////////////////////////Modal////////////////////////////////////
-
-modalEl = document.querySelector(".modal");
+const modalEl = document.querySelector(".modal");
 
 async function openModalTrending(kinopoiskId) {
   try {
@@ -145,12 +143,8 @@ window.addEventListener("keydown", (evt) => {
   }
 });
 
-////////////////////////////Modal////////////////////////////////////
-
-////////////////////////////Horizontal scroll////////////////////////////////////
-
 const container = document.querySelector(".trendingMoviesContainer");
-let isDown = false;
+const isDown = false;
 let startX;
 let scrollLeft;
 
@@ -172,8 +166,6 @@ container.addEventListener("mousemove", (e) => {
   if (!isDown) return;
   e.preventDefault();
   const x = e.pageX - container.offsetLeft;
-  const walk = (x - startX) * 3;
+  const walk = (x - startX) * 2;
   container.scrollLeft = scrollLeft - walk;
 });
-
-////////////////////////////Horizontal scroll////////////////////////////////////
