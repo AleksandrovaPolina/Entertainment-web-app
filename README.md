@@ -4,7 +4,7 @@
 This project allows users to select a movie or TV series according to their preferences, shows what is currently trending and gives them the opportunity to add movies to favorites.
 ***
 
-## Установка
+## Installation
 1. Cloning a repository to an empty folder ```git clone https://github.com/AleksandrovaPolina/Entertainment-web-app.git```
 
 2. Open a tilted folder
