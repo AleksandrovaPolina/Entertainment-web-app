@@ -71,12 +71,28 @@ document.addEventListener("DOMContentLoaded", function () {
           </div>
           <h3 class="movieTitle">${movie.nameOriginal}</h3>
           <button class="playButton">More info</button>
-          <button class="bookmarkButton" id="addFavorite">
-          <img src="${movie.bookmarked ? 
-            './assets/icon-bookmark-full.svg' : 
-            './assets/icon-bookmark-empty.svg'}" alt="Bookmark">
-          </button>
+          <button class="bookmarkButton ${movie.bookmarked ? 'active' : ''}" id="addFavorite">
+          <img src="${movie.bookmarked ? './assets/icon-bookmark-full.svg' : './assets/icon-bookmark-empty.svg'}" alt="Bookmark">
+      </button>
           `;
+
+          bookmarkButton.addEventListener("click", (event) => {
+            event.stopPropagation();
+            const bookmarkButton = event.target;
+            const movieId = movieCard.getAttribute("id");
+            const movieData = data.items.find((item) => item.kinopoiskId === parseInt(movieId));
+        
+            if (bookmarkButton.classList.contains("active")) {
+                removeFromBookmarks(movieData);
+                bookmarkButton.classList.remove("active");
+                bookmarkButton.innerHTML = '<img src="./assets/icon-bookmark-empty.svg" alt="Bookmark">';
+            } else {
+                saveToBookmarks(movieData);
+                bookmarkButton.classList.add("active");
+                bookmarkButton.innerHTML = '<img src="./assets/icon-bookmark-full.svg" alt="Bookmark">';
+            }
+        });
+
       movieCard.addEventListener("click", () => {
         openModal(movie);
         disableScroll();
@@ -254,10 +270,10 @@ document.addEventListener("DOMContentLoaded", function () {
 
   ///////////////////////Bookmarks////////////////////////////////////////
 
-  bookmarkButton.addEventListener("click", () => {
-    showBookmarks();
-  });
 
+  bookmarkButton.addEventListener("click", () => {
+    renderBookmarks();
+});
   function saveToBookmarks(movie) {
     let bookmarks = JSON.parse(localStorage.getItem("bookmarks")) || [];
     const existingBookmark = bookmarks.find((bookmark) => bookmark.kinopoiskId === movie.kinopoiskId);
@@ -274,15 +290,37 @@ document.addEventListener("DOMContentLoaded", function () {
     localStorage.setItem("bookmarks", JSON.stringify(bookmarks));
   }
 
-  function showBookmarks() {
+
+  function renderBookmarks() {
     const bookmarks = JSON.parse(localStorage.getItem("bookmarks")) || [];
     const data = { items: bookmarks };
     viewMovies(data, "Bookmarks");
-    createPagination("ALL", "Bookmarks");
     hideTrendingSection();
     changeTitle("Bookmarks");
-  }
 
+    const clearAllButton = document.createElement("button");
+    clearAllButton.innerText = "Clear All";
+    clearAllButton.classList.add("clearAllButton");
+
+    const paginationContainer = document.querySelector(".pagination");
+    paginationContainer.parentNode.insertBefore(clearAllButton, paginationContainer);
+
+    clearAllButton.addEventListener("click", () => {
+        clearAllBookmarks();
+        clearAllButton.style.display = "none";
+        renderBookmarks(); // После очистки перерисовываем список избранных фильмов
+    });
+
+    if (bookmarks.length > 0) {
+        clearAllButton.style.display = "block";
+    } else {
+        clearAllButton.style.display = "none";
+    }
+}
+
+function clearAllBookmarks() {
+  localStorage.removeItem("bookmarks"); // Удаляем весь ключ "bookmarks" из локального хранилища
+}
 
 
   function hideTrendingSection() {
@@ -303,4 +341,7 @@ document.addEventListener("DOMContentLoaded", function () {
 
   
   }
+
+ 
+
 });
