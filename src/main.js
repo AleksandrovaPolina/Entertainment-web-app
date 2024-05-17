@@ -1,4 +1,4 @@
-// Функция для получения фильмов из API
+
 document.addEventListener("DOMContentLoaded", function () {
   const api_key = "7abb31d8-f85d-47c0-97bc-f25c197dd055";
   const wrapperMain = document.querySelector(".wrapper-main");
@@ -31,7 +31,7 @@ document.addEventListener("DOMContentLoaded", function () {
       }
       const resData = await res.json();
       totalPages = resData.pagesCount;
-      viewMovies(resData, title);
+      viewMovies(resData);
     } catch (error) {
       document.querySelector(".errorMessage").innerHTML = `
       <img class="error-img" src="./assets/gear.png" alt="Gear">
@@ -40,9 +40,8 @@ document.addEventListener("DOMContentLoaded", function () {
     }
   }
 
-  // Функция для отображения фильмов на странице
-
-  function viewMovies(data, title) {
+ 
+  function viewMovies(data) {
     const containerMain = document.querySelector(".container-main");
     containerMain.innerHTML = "";
 
@@ -204,10 +203,10 @@ document.addEventListener("DOMContentLoaded", function () {
   function createPagination(type = "ALL", title = "") {
     let currentPage = 1;
 
-     // Проверяем, существует ли уже контейнер пагинации
+     
   const existingPagination = document.querySelector(".pagination");
   if (existingPagination) {
-    // Если существует, удаляем его
+   
     existingPagination.remove();
   }
     function handlePrevPage() {
@@ -294,7 +293,7 @@ document.addEventListener("DOMContentLoaded", function () {
   function renderBookmarks() {
     const bookmarks = JSON.parse(localStorage.getItem("bookmarks")) || [];
     const data = { items: bookmarks };
-    viewMovies(data, "Bookmarks");
+    viewMovies(data);
     hideTrendingSection();
     changeTitle("Bookmarks");
 
@@ -308,7 +307,7 @@ document.addEventListener("DOMContentLoaded", function () {
     clearAllButton.addEventListener("click", () => {
         clearAllBookmarks();
         clearAllButton.style.display = "none";
-        renderBookmarks(); // После очистки перерисовываем список избранных фильмов
+        renderBookmarks();
     });
 
     if (bookmarks.length > 0) {
@@ -319,7 +318,7 @@ document.addEventListener("DOMContentLoaded", function () {
 }
 
 function clearAllBookmarks() {
-  localStorage.removeItem("bookmarks"); // Удаляем весь ключ "bookmarks" из локального хранилища
+  localStorage.removeItem("bookmarks"); 
 }
 
 
